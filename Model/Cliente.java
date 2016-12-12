@@ -1,7 +1,8 @@
+package funcionario;
 import java.util.*;
 
 
-publiv class    Cliente {
+public class Cliente {
     private String nome,cpf,telefone;
     private int idade;
     private Endereco end;
@@ -14,7 +15,6 @@ publiv class    Cliente {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
-        this.rg = rg;
         this.end = end;
         this.telefone = telefone;
     }
@@ -27,11 +27,11 @@ publiv class    Cliente {
         this.nome = nome;
     }
     
-    public String getIdade() {
+    public int getIdade() {
         return idade;
     }
     
-    public void setIdade(String idade) {
+    public void setIdade(int idade) {
         this.idade = idade;
     }
     
@@ -42,14 +42,7 @@ publiv class    Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
-    public String getRg() {
-        return rg;
-    }
-    
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
+
     
     public Endereco getEnd() {
         return end;
