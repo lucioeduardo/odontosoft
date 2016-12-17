@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import odontosoft.model.database.ConexaoBanco;
+
 /**
  * FXML Controller class
  *
@@ -23,17 +25,17 @@ public class TelaLoginController implements Initializable {
     TextField txtFieldNomeUsuario,txtFieldSenha;
     @FXML
     Button btnEntrar;
-    
+    ConexaoBanco conexao;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
     }    
     
     @FXML
     public void clickBtnEntrar(){
-        System.out.println(txtFieldNomeUsuario.getText());
+        String sql = "select id, senha from Usuario where id = ?;";
+        
     }
 }
