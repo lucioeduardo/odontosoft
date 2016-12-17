@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author eduardo
  */
-public class FXMLTelaPrincipalController implements Initializable {
+public class TelaLoginController implements Initializable {
 
     /**
      * Initializes the controller class.
