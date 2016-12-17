@@ -9,6 +9,6 @@ package odontosoft.model.dao;
  *
  * @author Aluno
  */
-public class ClienteDAO {
+public class PacienteDAO {
     
 }
