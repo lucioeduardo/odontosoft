@@ -1,18 +1,20 @@
 package odontosoft.model.domain;
 
 public class Paciente {
-    private String nome,cpf,telefone;
-    private int idade;
+    private String nome,cpf,telefone, data, foto;
+    private int id;
     
     public Paciente () {
         
     }
     
-    public Paciente (String nome, int idade, String cpf, String telefone) {
+    public Paciente (int id, String nome, String data, String cpf, String telefone, String foto) {
         this.nome = nome;
-        this.idade = idade;
+        this.id = id;
+        this.data = data;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.foto = foto;
     }
     
     public String getNome() {
@@ -24,11 +26,11 @@ public class Paciente {
     }
     
     public int getIdade() {
-        return idade;
+        return id;
     }
     
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setIdade(int id) {
+        this.id = id;
     }
     
     public String getCpf() {
@@ -46,5 +48,23 @@ public class Paciente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
+    
     
 }
