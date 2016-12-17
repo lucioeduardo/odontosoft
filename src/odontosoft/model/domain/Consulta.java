@@ -13,11 +13,11 @@ import java.util.ArrayList;
  */
 public class Consulta {
     private Funcionario dentista;
-    private Cliente paciente;
+    private Paciente paciente;
     private ArrayList<String> procedimentos;
     private double preco;
 
-    public Consulta(Funcionario dentista, Cliente paciente, ArrayList<String> procedimentos, double preco) {
+    public Consulta(Funcionario dentista, Paciente paciente, ArrayList<String> procedimentos, double preco) {
         this.dentista = dentista;
         this.paciente = paciente;
         this.procedimentos = procedimentos;
@@ -32,11 +32,11 @@ public class Consulta {
         this.dentista = dentista;
     }
 
-    public Cliente getPaciente() {
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Cliente paciente) {
+    public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
