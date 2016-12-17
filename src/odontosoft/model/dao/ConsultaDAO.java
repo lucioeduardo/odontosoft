@@ -9,6 +9,9 @@ package odontosoft.model.dao;
  *
  * @author Aluno
  */
+
+
 public class ConsultaDAO {
+   
     
 }
