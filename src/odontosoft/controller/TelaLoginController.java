@@ -7,7 +7,10 @@ package odontosoft.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -15,13 +18,22 @@ import javafx.fxml.Initializable;
  * @author eduardo
  */
 public class TelaLoginController implements Initializable {
-
+    
+    @FXML
+    TextField txtFieldNomeUsuario,txtFieldSenha;
+    @FXML
+    Button btnEntrar;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
+    @FXML
+    public void clickBtnEntrar(){
+        System.out.println(txtFieldNomeUsuario.getText());
+    }
 }
