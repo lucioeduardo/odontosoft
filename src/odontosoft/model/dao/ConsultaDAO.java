@@ -38,7 +38,21 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
         this.procedimentos = procedimentos;
     }
 
+   public double totalProcedimentos(){
+       double total = 0;
+       for(int i = 0; i < procedimentos.size(); i++){
+           total += procedimentos.get(i).getPreco();
+       }
+       return total;
+   }
    
+   public String descricaoProcedimentos(){
+       String descricao = null;
+       for(int i = 0; i < procedimentos.size(); i++){
+           descricao += procedimentos.get(i).getDescricao() + " | ";
+       }
+       return descricao;
+   }
     
     @Override
     public void inserir(Consulta var) {
@@ -67,7 +81,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             query = stmt.executeQuery();
             
             while(query.next()){
-                list.add(new Consulta(funcionario, paciente, procedimentos, 0, sql));
+                list.add(new Consulta(funcionario, paciente, procedimentos, totalProcedimentos(), descricaoProcedimentos()));
                 
             }
             query.close();
