@@ -10,6 +10,8 @@ package odontosoft.model.database;
  * @author Aluno
  */
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexaoBanco {
     Connection conexao = null; 
@@ -28,5 +30,13 @@ public class ConexaoBanco {
     
     public Connection getConexao(){
         return conexao;
+    }
+    
+    public void fecharConexao(){
+        try {
+            this.conexao.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBanco.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
