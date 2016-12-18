@@ -11,15 +11,15 @@ package odontosoft.model.domain;
  */
 public class Funcionario {
     private String nome,cpf,rg,telefone;
-    private int idade;
+    private int id;
     private double salario;
 
-    public Funcionario(String nome, String cpf, String rg, String telefone, int idade, double salario) {
+    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.telefone = telefone;
-        this.idade = idade;
+        this.id = id;
         this.salario = salario;
     }
 
@@ -55,12 +55,12 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public int getIdade() {
-        return idade;
+    public int getId() {
+        return id;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getSalario() {

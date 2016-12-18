@@ -25,11 +25,11 @@ public class Paciente {
         this.nome = nome;
     }
     
-    public int getIdade() {
+    public int getId() {
         return id;
     }
     
-    public void setIdade(int id) {
+    public void setId(int id) {
         this.id = id;
     }
     

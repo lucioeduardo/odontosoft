@@ -15,18 +15,23 @@ import java.sql.SQLException;
 import java.util.List;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta;
+import odontosoft.model.domain.Funcionario;
+import odontosoft.model.domain.Paciente;
 
 public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
     ConexaoBanco conexao;
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
     Consulta consulta;
+    Paciente paciente;
+    Funcionario funcionario;
     
     @Override
     public void inserir(Consulta var) {
-        String sql = "INSERT INTO Consulta(idPaciente, idFuncionario, dataConsulta) values (?,?,?);";
+        String sql = "INSERT INTO Consulta(idPaciente, idFuncionario, dataConsulta) VALUES (?,?,?);";
         try{
             stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, paciente.getId());
            
         }catch(SQLException e){
             System.out.println("Error: "+e);
