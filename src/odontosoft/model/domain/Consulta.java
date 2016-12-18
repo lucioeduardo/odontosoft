@@ -16,13 +16,16 @@ public class Consulta {
     private Paciente paciente;
     private ArrayList<String> procedimentos;
     private double preco;
+    private String data;
 
-    public Consulta(Funcionario dentista, Paciente paciente, ArrayList<String> procedimentos, double preco) {
+    public Consulta(Funcionario dentista, Paciente paciente, ArrayList<String> procedimentos, double preco, String data) {
         this.dentista = dentista;
         this.paciente = paciente;
         this.procedimentos = procedimentos;
         this.preco = preco;
+        this.data = data;
     }
+
 
     public Funcionario getDentista() {
         return dentista;
@@ -54,6 +57,14 @@ public class Consulta {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
     
     

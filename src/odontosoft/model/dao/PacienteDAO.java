@@ -23,6 +23,14 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
     Paciente paciente;
+
+    public PacienteDAO(ConexaoBanco conexao, Paciente paciente) {
+        this.conexao = conexao;
+        this.paciente = paciente;
+    }
+    
+    
+    
     @Override
     public void inserir(Paciente var) {
         String sql = "INSERT INTO Paciente(nome, dataNascimento, cpf, telefone, foto) VALUES"
@@ -34,6 +42,10 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             stmt.setString(3, paciente.getCpf());
             stmt.setString(4, paciente.getTelefone());
             stmt.setString(5, paciente.getFoto());
+            
+            stmt.execute();
+            stmt.close();
+            System.out.println("Dados inseridos no banco de dados!");
         }catch(SQLException e){
             System.out.println("Error: "+e);
         }
@@ -53,6 +65,8 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
                 list.add(new Paciente(query.getInt(1), query.getString(2), query.getString(3),
                         query.getString(4), query.getString(5), query.getString(6)));
             }
+            query.close();
+            stmt.close();
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
@@ -68,6 +82,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             
             stmt.execute();
             stmt.close();
+            System.out.println("Dados deletados com sucesso!");
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
@@ -88,6 +103,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             
             stmt.execute();
             stmt.close();
+            System.out.println("Dados atualizados!");
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
@@ -103,10 +119,12 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
-            while(rs.next())
+            while(rs.next()){
                 paciente = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("data"), 
                         rs.getString("cpf"), rs.getString("telefone"), rs.getString("foto"));
-            
+            }
+            rs.close();
+            stmt.close();
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
