@@ -11,10 +11,10 @@ import java.util.List;
  *
  * @author eduardo
  */
-public interface InterfaceGenericDAO<T> {
+public interface InterfaceGenericDAO<T,idType> {
     void inserir(T var);
     List<T> listar();
-    void delete(int id);
-    void update(int id, T newVar);
-    void buscaPorId(int id);
+    void delete(idType id);
+    void update(idType id, T newVar);
+    T buscaPorId(idType id);
 }
