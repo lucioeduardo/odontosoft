@@ -52,5 +52,6 @@ CREATE TABLE Consulta_has_Procedimento(
     FOREIGN KEY (idConsulta)
 	REFERENCES Consulta(id),
     FOREIGN KEY (idProcedimento)
-	REFERENCES Procedimento(id)
+	REFERENCES Procedimento(id),
+    PRIMARY KEY (idConsulta, idProcedimento)
 );
