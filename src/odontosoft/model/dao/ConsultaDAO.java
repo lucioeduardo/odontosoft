@@ -27,14 +27,12 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
     PreparedStatement stmt = null;
     Paciente paciente;
     Funcionario funcionario;
-    Consulta consulta;
     ArrayList<Procedimento> procedimentos = new ArrayList<>();
 
-    public ConsultaDAO(ConexaoBanco conexao, Paciente paciente, Funcionario funcionario, Consulta consulta, ArrayList<Procedimento> procedimentos) {
+    public ConsultaDAO(ConexaoBanco conexao, Paciente paciente, Funcionario funcionario, ArrayList<Procedimento> procedimentos) {
         this.conexao = conexao;
         this.paciente = paciente;
         this.funcionario = funcionario;
-        this.consulta = consulta;
         this.procedimentos = procedimentos;
     }
     
@@ -45,7 +43,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             stmt = connect.prepareStatement(sql);
             stmt.setInt(1, paciente.getId());
             stmt.setInt(2, funcionario.getId());
-            stmt.setString(3, consulta.getData());
+            stmt.setString(3, var.getData());
             
             stmt.execute();
             stmt.close();
@@ -65,7 +63,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             query = stmt.executeQuery();
             
             while(query.next()){
-                list.add(new Consulta(funcionario.getId(), paciente.getId(), consulta.getData()));
+                list.add(new Consulta(query.getInt("idPaciente"), query.getInt("idFuncionario"), query.getString("dataConsulta")));
                 
             }
             query.close();

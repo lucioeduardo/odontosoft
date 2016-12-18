@@ -22,11 +22,11 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     ConexaoBanco conexao;
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
-    Paciente paciente;
+    //Paciente paciente;
 
     public PacienteDAO(ConexaoBanco conexao, Paciente paciente) {
         this.conexao = conexao;
-        this.paciente = paciente;
+        //this.paciente = paciente;
     }
     
     
@@ -37,11 +37,11 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
                 + "(?,?,?,?,?);";
         try{
             stmt = connect.prepareStatement(sql);
-            stmt.setString(1, paciente.getNome());
-            stmt.setString(2, paciente.getData());
-            stmt.setString(3, paciente.getCpf());
-            stmt.setString(4, paciente.getTelefone());
-            stmt.setString(5, paciente.getFoto());
+            stmt.setString(1, var.getNome());
+            stmt.setString(2, var.getData());
+            stmt.setString(3, var.getCpf());
+            stmt.setString(4, var.getTelefone());
+            stmt.setString(5, var.getFoto());
             
             stmt.execute();
             stmt.close();

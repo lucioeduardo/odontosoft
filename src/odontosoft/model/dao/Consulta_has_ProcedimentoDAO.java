@@ -5,22 +5,28 @@
  */
 package odontosoft.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
-import odontosoft.model.domain.Procedimento;
+import odontosoft.model.database.ConexaoBanco;
+import odontosoft.model.domain.Consulta_has_Procedimento;
 
 /**
  *
  * @author mikolaja
  */
-public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Procedimento, Integer>{
-
+public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consulta_has_Procedimento, Integer>{
+    ConexaoBanco conexao;
+    Connection connect = conexao.getConexao();
+    PreparedStatement stmt = null;
+    Consulta_has_Procedimento chs;
     @Override
-    public void inserir(Procedimento var) {
+    public void inserir(Consulta_has_Procedimento var) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Procedimento> listar() {
+    public List<Consulta_has_Procedimento> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,13 +36,15 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Procedi
     }
 
     @Override
-    public void update(Integer id, Procedimento newVar) {
+    public void update(Integer id, Consulta_has_Procedimento newVar) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Procedimento buscaPorId(Integer id) {
+    public Consulta_has_Procedimento buscaPorId(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
     
 }
