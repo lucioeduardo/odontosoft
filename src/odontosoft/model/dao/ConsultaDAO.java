@@ -37,22 +37,6 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
         this.consulta = consulta;
         this.procedimentos = procedimentos;
     }
-
-   public double totalProcedimentos(){
-       double total = 0;
-       for(int i = 0; i < procedimentos.size(); i++){
-           total += procedimentos.get(i).getPreco();
-       }
-       return total;
-   }
-   
-   public String descricaoProcedimentos(){
-       String descricao = null;
-       for(int i = 0; i < procedimentos.size(); i++){
-           descricao += procedimentos.get(i).getDescricao() + " | ";
-       }
-       return descricao;
-   }
     
     @Override
     public void inserir(Consulta var) {
@@ -112,8 +96,8 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
         String sql = "UPDATE Consulta SET idPaciente = ?, idFuncionario = ? WHERE id = ?;";
         try{
             stmt = connect.prepareStatement(sql);
-            stmt.setInt(1, paciente.getId());
-            stmt.setInt(2, funcionario.getId());
+            stmt.setInt(1, newVar.getPaciente());
+            stmt.setInt(2, newVar.getDentista());
             stmt.setInt(3, id);
             
             stmt.execute();
