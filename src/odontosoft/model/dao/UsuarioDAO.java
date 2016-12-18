@@ -19,7 +19,7 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
 
     @Override
     public void inserir(Usuario user) {
-        String sql = "insert into Usuario (id,senha,idFuncionario) values (?,?,?)";
+        String sql = "INSERT INTO Usuario (id,senha,idFuncionario) VALUES (?,?,?)";
         PreparedStatement stmt = null;
         
         try{
@@ -34,14 +34,12 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
         }catch(SQLException e){
             System.out.println("Erro na inserção dos dados!");
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList();
-        String sql = "select * from Usuario";
+        String sql = "SELECT * FROM Usuario";
         
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -62,7 +60,7 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
 
     @Override
     public void delete(String id) {
-        String sql = "delete from Usuario where id=?";
+        String sql = "DELETE FROM Usuario WHERE id=?";
         
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -72,13 +70,11 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
         }catch(SQLException e){
             System.out.println("Erro ao deletar usuario!");
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void update(String id, Usuario novoUsuario) {
-        String sql = "update Usuario set id=? nome=? idFuncionario=? where id=?";
+        String sql = "UPDATE Usuario SET id=?, nome=?, idFuncionario=? where id=?";
         
         try {
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -96,7 +92,7 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
 
     @Override
     public Usuario buscaPorId(String id) {
-        String sql = "select * from Usuario where id = ?";
+        String sql = "SELECT * FROM Usuario WHERE id = ?";
         Usuario user = null;
         
         try {

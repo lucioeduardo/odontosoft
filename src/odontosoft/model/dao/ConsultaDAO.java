@@ -9,9 +9,49 @@ package odontosoft.model.dao;
  *
  * @author Aluno
  */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+import odontosoft.model.database.ConexaoBanco;
+import odontosoft.model.domain.Consulta;
 
+public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
+    ConexaoBanco conexao;
+    Connection connect = conexao.getConexao();
+    PreparedStatement stmt = null;
+    Consulta consulta;
+    
+    @Override
+    public void inserir(Consulta var) {
+        String sql = "INSERT INTO Consulta(idPaciente, idFuncionario, dataConsulta) values (?,?,?);";
+        try{
+            stmt = connect.prepareStatement(sql);
+           
+        }catch(SQLException e){
+            System.out.println("Error: "+e);
+        }
+    }
 
-public class ConsultaDAO {
+    @Override
+    public List<Consulta> listar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(Integer id, Consulta newVar) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Consulta buscaPorId(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
     
 }
