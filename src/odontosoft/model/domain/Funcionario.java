@@ -11,18 +11,30 @@ package odontosoft.model.domain;
  */
 public class Funcionario {
     private String nome,cpf,rg,telefone;
+    private String dataNascimento;
+    private boolean Gerente;
     private int id;
     private double salario;
 
-    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario) {
+    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario, String dataNascimento, boolean Gerente) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.telefone = telefone;
         this.id = id;
         this.salario = salario;
+        this.dataNascimento = dataNascimento;
+        this.Gerente = Gerente;
     }
 
+    public boolean isGerente() {
+        return Gerente;
+    }
+
+    public void setIsGerente(boolean isGerente) {
+        this.Gerente = isGerente;
+    }
+        
     public String getNome() {
         return nome;
     }
@@ -70,6 +82,12 @@ public class Funcionario {
     public void setSalario(double salario) {
         this.salario = salario;
     }
-    
-    
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }            
 }
