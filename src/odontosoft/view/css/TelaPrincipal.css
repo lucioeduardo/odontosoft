@@ -1,0 +1,13 @@
+.btnMenuLateral{
+    -fx-background-color:transparent;
+}
+
+.btnMenuLateral:hover{
+    -fx-background-color:#E7E7E7;
+    -fx-cursor: hand;
+}
+
+.split-pane-divider {
+   -fx-background-color: transparent;
+   -fx-padding: 0 1 0 1;
+}
