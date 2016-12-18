@@ -62,7 +62,17 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM Consulta_has_Procedimento WHERE id = ?";
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
+            stmt.execute();
+            stmt.close();
+            System.out.println("Dados deletados com sucesso!");
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
     }
 
     @Override
