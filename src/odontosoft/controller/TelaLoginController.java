@@ -17,6 +17,7 @@ import java.sql.Connection;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import odontosoft.model.dao.UsuarioDAO;
 
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Usuario;
@@ -32,10 +33,9 @@ public class TelaLoginController implements Initializable {
     TextField txtFieldNomeUsuario,txtFieldSenha;
     @FXML
     Button btnEntrar;
-    ConexaoBanco conexao;
+    
+    ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
-    PreparedStatement stmt = null;
-    Usuario usuario;
     
    
     /**
@@ -48,25 +48,20 @@ public class TelaLoginController implements Initializable {
     
     @FXML
     public void clickBtnEntrar(){
-        usuario = new Usuario(txtFieldNomeUsuario.getText(), txtFieldSenha.getText());
-        String sql = "select id, senha from Usuario where id = ?;";
-        try{
-            stmt = connect.prepareStatement(sql);
-            stmt.setString(1, usuario.getId());
-            ResultSet executeQuery = stmt.executeQuery(sql);
-            
-            while(executeQuery.next()){
-                if(usuario.getId().equals(executeQuery.getString("id")) && 
-                        usuario.getSenha().equals(executeQuery.getString("senha"))){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Conexão");
-                    alert.setContentText("Conexão realizada com sucesso!");
-                    alert.showAndWait();
-                }
-            }
-            
-        }catch(SQLException e){
-            System.out.println("Error: " + e);
+        String idInformado = txtFieldNomeUsuario.getText();
+        String senhaInformada = txtFieldSenha.getText();
+        
+        Usuario user = new UsuarioDAO(connect).buscaPorId(idInformado);
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Conexão");
+        
+        if(senhaInformada.equals(user.getSenha())){
+            alert.setContentText("Conexão realizada com sucesso!");
+            alert.showAndWait();
+        }else{
+            alert.setContentText("Usuario ou senha incorreto(s)!");
+            alert.showAndWait();
         }
         
     }
