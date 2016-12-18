@@ -22,11 +22,9 @@ public class ProcedimentoDAO implements InterfaceGenericDAO<Procedimento, Intege
     ConexaoBanco conexao;
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
-    Procedimento procedimento;
 
-    public ProcedimentoDAO(ConexaoBanco conexao, Procedimento procedimento) {
+    public ProcedimentoDAO(ConexaoBanco conexao) {
         this.conexao = conexao;
-        this.procedimento = procedimento;
     }
     
     @Override
@@ -34,8 +32,8 @@ public class ProcedimentoDAO implements InterfaceGenericDAO<Procedimento, Intege
         String sql = "INSERT INTO Procedimento(descricao, preco) VALUES (?,?);";
         try{
             stmt = connect.prepareStatement(sql);
-            stmt.setString(1, procedimento.getDescricao());
-            stmt.setDouble(2, procedimento.getPreco());
+            stmt.setString(1, var.getDescricao());
+            stmt.setDouble(2, var.getPreco());
             
             stmt.execute();
             stmt.close();
