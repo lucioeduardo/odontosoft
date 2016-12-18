@@ -75,7 +75,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
 
     @Override
     public void update(Integer id, Funcionario newVar) {
-        // nome, cpf, rg, telefone, salario, dataNascimento, Gerente
+        // nome, cpf, rg, telefone, salario, dataNascimento, isGerente
         String sql = "UPDATE Funcionario SET nome = ?, cpf = ?, "
                 + "rg = ?, telefone = ?, salario = ?, dataNascimento = ?, isGerente = ? where id = ?;";
         try{
