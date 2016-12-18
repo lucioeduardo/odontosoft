@@ -100,8 +100,28 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
     }
 
     @Override
-    public Consulta_has_Procedimento buscaPorId(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Consulta_has_Procedimento buscaPorId(String idString) {
+        String sql = "SELECT * FROM Procedimento WHERE idConsulta = ? AND idProcedimento";
+        Consulta_has_Procedimento var = null;
+        String id[] = new String[2];
+        id = idString.split("|");
+        
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, Integer.parseInt(id[0]));
+            stmt.setInt(2, Integer.parseInt(id[1]));
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                var = new Consulta_has_Procedimento(rs.getInt("idConsulta"), rs.getInt("idProcedimento"));
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
+        
+        return var;
     }
 
    
