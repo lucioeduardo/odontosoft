@@ -5,6 +5,7 @@
  */
 package odontosoft.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +15,18 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import odontosoft.model.dao.UsuarioDAO;
 
 import odontosoft.model.database.ConexaoBanco;
@@ -29,6 +39,8 @@ import odontosoft.model.domain.Usuario;
  */
 public class TelaLoginController implements Initializable {
     
+    @FXML
+    BorderPane borderPane;
     @FXML
     TextField txtFieldNomeUsuario,txtFieldSenha;
     @FXML
@@ -47,7 +59,11 @@ public class TelaLoginController implements Initializable {
     }    
     
     @FXML
-    public void clickBtnEntrar(){
+    public void clickBtnEntrar(ActionEvent event){
+        
+        
+        Stage stage = (Stage)borderPane.getScene().getWindow();
+        
         String idInformado = txtFieldNomeUsuario.getText();
         String senhaInformada = txtFieldSenha.getText();
         
@@ -57,12 +73,37 @@ public class TelaLoginController implements Initializable {
             alert.setTitle("Conexão");
         
         if(senhaInformada.equals(user.getSenha())){
-            alert.setContentText("Conexão realizada com sucesso!");
-            alert.showAndWait();
+            try {
+                alert.setContentText("Conexão realizada com sucesso!");
+                alert.showAndWait();
+                
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaPrincipal.fxml"));
+                Parent root = fxmlLoader.load();
+                TelaPrincipalController controller = fxmlLoader.getController();
+                controller.setUser(user);
+                
+                System.out.println("Hello");
+                
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setFullScreen(true);
+                scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/TelaPrincipal.css").toExternalForm());
+                
+                
+                
+                //borderPane.setCenter(FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaPrincipal.fxml")));
+            } catch (IOException ex) {
+                System.out.println("Erro no border!");
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }else{
             alert.setContentText("Usuario ou senha incorreto(s)!");
             alert.showAndWait();
         }
+        
+        
         
     }
 }
