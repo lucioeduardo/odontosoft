@@ -5,7 +5,6 @@ import java.sql.*;
 import java.util.*;
 import odontosoft.model.database.ConexaoBanco;
 import java.lang.*;
-import odontosoft.model.domain.Paciente;
 
 public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>{
     ConexaoBanco conexao;
