@@ -7,7 +7,9 @@ package odontosoft.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta_has_Procedimento;
@@ -39,7 +41,23 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
 
     @Override
     public List<Consulta_has_Procedimento> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ResultSet query;
+        List<Consulta_has_Procedimento> list = new ArrayList<>();
+        String sql = "SELECT * FROM Procedimento";
+        try{
+            stmt = connect.prepareStatement(sql);
+            query = stmt.executeQuery();
+            
+            while(query.next()){
+                list.add(new Consulta_has_Procedimento(query.getInt("idConsulta"), query.getInt("idProcedimento")));
+                
+            }
+            query.close();
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
+        return list;
     }
 
     @Override
