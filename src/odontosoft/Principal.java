@@ -28,6 +28,8 @@ public class Principal extends Application {
     public void start(Stage primaryStage) {
         
         try {
+            System.out.println(getClass().getResource("view/FXMLTelaLogin.fxml"));
+            
             Parent root = FXMLLoader.load(getClass().getResource("view/FXMLTelaLogin.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -40,7 +42,7 @@ public class Principal extends Application {
         primaryStage.setTitle("OdontoSoft");
         
         primaryStage.setFullScreen(true);
-        
+        primaryStage.setResizable(false);
         
         
         primaryStage.show();
