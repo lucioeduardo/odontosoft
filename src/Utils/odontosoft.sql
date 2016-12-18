@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS odontosoft;
 USE odontosoft;
 
 CREATE TABLE Paciente(
-    idPaciente int primary key auto_increment,
+    id int primary key auto_increment,
     nome varchar(100) not null,
     dataNascimento date not null,
     cpf varchar(11) not null unique,
@@ -11,7 +11,7 @@ CREATE TABLE Paciente(
 );
 
 CREATE TABLE Funcionario(
-    idFuncionario int primary key auto_increment,
+    id int primary key auto_increment,
     nome varchar(100) not null,
     cpf varchar(11) not null unique,
     telefone varchar(11) not null unique,
@@ -22,7 +22,7 @@ CREATE TABLE Funcionario(
 );
 
 CREATE TABLE Procedimento(
-    idProcedimento int primary key auto_increment,
+    id int primary key auto_increment,
     descricao varchar(100) not null,
     preco double not null
 );
@@ -30,27 +30,27 @@ CREATE TABLE Procedimento(
 CREATE TABLE Usuario(
     id varchar(50) not null unique primary key,
     senha varchar(45) not null,
-    Funcionario_idFuncionario int not null,
-    FOREIGN KEY (Funcionario_idFuncionario)
-	REFERENCES Funcionario(idFuncionario)
+    idFuncionario int not null,
+    FOREIGN KEY (idFuncionario)
+	REFERENCES Funcionario(id)
 );
 
 CREATE TABLE Consulta(
-    idConsulta int primary key auto_increment,
-    Paciente_idPaciente int not null,
-    Funcionario_idFuncionario int not null,
+    id int primary key auto_increment,
+    idPaciente int not null,
+    idFuncionario int not null,
     dataConsulta date,
-    FOREIGN KEY (Paciente_idPaciente)
-	REFERENCES Paciente(idPaciente),
-    FOREIGN KEY (Funcionario_idFuncionario)
-	REFERENCES Funcionario(idFuncionario)
+    FOREIGN KEY (idPaciente)
+	REFERENCES Paciente(id),
+    FOREIGN KEY (idFuncionario)
+	REFERENCES Funcionario(id)
 );
 
 CREATE TABLE Consulta_has_Procedimento(
-    Consulta_idConsulta int not null,
-    Procedimento_idProcedimento int not null,
-    FOREIGN KEY (Consulta_idConsulta)
-	REFERENCES Consulta(idConsulta),
-    FOREIGN KEY (Procedimento_idProcedimento)
-	REFERENCES Procedimento(idProcedimento)
+    idConsulta int not null,
+    idProcedimento int not null,
+    FOREIGN KEY (idConsulta)
+	REFERENCES Consulta(id),
+    FOREIGN KEY (idProcedimento)
+	REFERENCES Procedimento(id)
 );
