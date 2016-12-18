@@ -18,7 +18,7 @@ import odontosoft.model.domain.Consulta_has_Procedimento;
  *
  * @author mikolaja
  */
-public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consulta_has_Procedimento, Integer>{
+public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consulta_has_Procedimento, String>{
     ConexaoBanco conexao;
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
@@ -61,11 +61,14 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
     }
 
     @Override
-    public void delete(Integer id) {
-        String sql = "DELETE FROM Consulta_has_Procedimento WHERE id = ?";
+    public void delete(String idString) {
+        String sql = "DELETE FROM Consulta_has_Procedimento WHERE idConsulta = ? AND idProcedimento = ?";
+        String id[] = new String[2];
+        id = idString.split("|");
         try{
             stmt = connect.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setInt(1, Integer.parseInt(id[0]));
+            stmt.setInt(2, Integer.parseInt(id[1]));
             
             stmt.execute();
             stmt.close();
@@ -76,12 +79,28 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
     }
 
     @Override
-    public void update(Integer id, Consulta_has_Procedimento newVar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(String idString, Consulta_has_Procedimento newVar) {
+        String sql = "UPDATE Consulta_has_Procedimento SET idConsulta = ?, idProcedimento = ? WHERE idConsulta = ? "
+                + "AND idProceidmento = ?;";
+        String id[] = new String[2];
+        id = idString.split("|");
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, newVar.getIdConsulta());
+            stmt.setInt(2, newVar.getIdProcedimento());
+            stmt.setInt(3, Integer.parseInt(id[0]));
+            stmt.setInt(4, Integer.parseInt(id[1]));
+            
+            stmt.execute();
+            stmt.close();
+            System.out.println("Dados atualizados!");
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
     }
 
     @Override
-    public Consulta_has_Procedimento buscaPorId(Integer id) {
+    public Consulta_has_Procedimento buscaPorId(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
