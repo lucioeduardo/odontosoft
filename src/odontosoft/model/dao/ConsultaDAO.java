@@ -81,7 +81,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             query = stmt.executeQuery();
             
             while(query.next()){
-                list.add(new Consulta(funcionario, paciente, procedimentos, totalProcedimentos(), descricaoProcedimentos()));
+                list.add(new Consulta(funcionario.getId(), paciente.getId(), consulta.getData()));
                 
             }
             query.close();
@@ -94,17 +94,56 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM Consulta WHERE id = ?";
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
+            stmt.execute();
+            stmt.close();
+            System.out.println("Dados deletados com sucesso!");
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
     }
 
     @Override
     public void update(Integer id, Consulta newVar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE Consulta SET idPaciente = ?, idFuncionario = ? WHERE id = ?;";
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, paciente.getId());
+            stmt.setInt(2, funcionario.getId());
+            stmt.setInt(3, id);
+            
+            stmt.execute();
+            stmt.close();
+            System.out.println("Dados atualizados!");
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
     }
 
     @Override
     public Consulta buscaPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM Consulta WHERE id = ?";
+        Consulta var = null;
+        
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                var = new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), rs.getString("dataConsulta"));
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
+        
+        return var;
     }
    
     

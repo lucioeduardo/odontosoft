@@ -5,58 +5,37 @@
  */
 package odontosoft.model.domain;
 
-import java.util.ArrayList;
 
 /**
  *
  * @author Aluno
  */
 public class Consulta {
-    private Funcionario dentista;
-    private Paciente paciente;
-    private ArrayList<Procedimento> procedimentos;
-    private double preco;
+    private int paciente;
+    private int dentista;
     private String data;
 
-    public Consulta(Funcionario dentista, Paciente paciente, ArrayList<Procedimento> procedimentos, double preco, String data) {
+    public Consulta(int paciente, int dentista, String data) {
         this.dentista = dentista;
         this.paciente = paciente;
-        this.procedimentos = procedimentos;
-        this.preco = preco;
         this.data = data;
     }
 
 
-    public Funcionario getDentista() {
+    public int getDentista() {
         return dentista;
     }
 
-    public void setDentista(Funcionario dentista) {
+    public void setDentista(int dentista) {
         this.dentista = dentista;
     }
 
-    public Paciente getPaciente() {
+    public int getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void setPaciente(int paciente) {
         this.paciente = paciente;
-    }
-
-    public ArrayList<Procedimento> getProcedimentos() {
-        return procedimentos;
-    }
-
-    public void setProcedimentos(ArrayList<Procedimento> procedimentos) {
-        this.procedimentos = procedimentos;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public String getData() {

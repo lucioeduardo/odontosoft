@@ -91,7 +91,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     @Override
     public void update(Integer id, Paciente newVar) {
         String sql = "UPDATE Usuario SET nome = ?, dataNascimento = ?, "
-                + "cpf = ?, telefone = ?, foto = ? where id = ?;";
+                + "cpf = ?, telefone = ?, foto = ? WHERE id = ?;";
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, newVar.getNome());
@@ -112,7 +112,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     @Override
     public Paciente buscaPorId(Integer id) {
         String sql = "SELECT * FROM Paciente WHERE id = ?";
-        Paciente paciente = null;
+        Paciente var = null;
         
         try{
             stmt = connect.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
-                paciente = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("data"), 
+                var = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("data"), 
                         rs.getString("cpf"), rs.getString("telefone"), rs.getString("foto"));
             }
             rs.close();
@@ -129,7 +129,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             System.out.println("Error: " +e);
         }
         
-        return paciente;
+        return var;
     }
     
 }
