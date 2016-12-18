@@ -19,6 +19,7 @@ import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta;
 import odontosoft.model.domain.Funcionario;
 import odontosoft.model.domain.Paciente;
+import odontosoft.model.domain.Procedimento;
 
 public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
     ConexaoBanco conexao;
@@ -27,13 +28,17 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
     Paciente paciente;
     Funcionario funcionario;
     Consulta consulta;
+    ArrayList<Procedimento> procedimentos = new ArrayList<>();
 
-    public ConsultaDAO(ConexaoBanco conexao, Paciente paciente, Funcionario funcionario, Consulta consulta) {
+    public ConsultaDAO(ConexaoBanco conexao, Paciente paciente, Funcionario funcionario, Consulta consulta, ArrayList<Procedimento> procedimentos) {
         this.conexao = conexao;
         this.paciente = paciente;
         this.funcionario = funcionario;
         this.consulta = consulta;
-    } 
+        this.procedimentos = procedimentos;
+    }
+
+   
     
     @Override
     public void inserir(Consulta var) {
@@ -62,7 +67,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             query = stmt.executeQuery();
             
             while(query.next()){
-                list.add(new Consulta(funcionario, paciente, procedimentos, 0, sql))
+                list.add(new Consulta(funcionario, paciente, procedimentos, 0, sql));
                 
             }
             query.close();

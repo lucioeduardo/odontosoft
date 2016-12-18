@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class Consulta {
     private Funcionario dentista;
     private Paciente paciente;
-    private ArrayList<String> procedimentos;
+    private ArrayList<Procedimento> procedimentos;
     private double preco;
     private String data;
 
-    public Consulta(Funcionario dentista, Paciente paciente, ArrayList<String> procedimentos, double preco, String data) {
+    public Consulta(Funcionario dentista, Paciente paciente, ArrayList<Procedimento> procedimentos, double preco, String data) {
         this.dentista = dentista;
         this.paciente = paciente;
         this.procedimentos = procedimentos;
@@ -43,11 +43,11 @@ public class Consulta {
         this.paciente = paciente;
     }
 
-    public ArrayList<String> getProcedimentos() {
+    public ArrayList<Procedimento> getProcedimentos() {
         return procedimentos;
     }
 
-    public void setProcedimentos(ArrayList<String> procedimentos) {
+    public void setProcedimentos(ArrayList<Procedimento> procedimentos) {
         this.procedimentos = procedimentos;
     }
 
