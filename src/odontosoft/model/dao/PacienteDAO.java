@@ -18,7 +18,7 @@ import odontosoft.model.domain.Paciente;
  *
  * @author Aluno
  */
-public class PacienteDAO implements InterfaceGenericDAO<Paciente>{
+public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     ConexaoBanco conexao;
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
@@ -60,18 +60,21 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente>{
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         String sql = "delete from Paciente where id = ?";
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setInt(1, id);
+            
+            stmt.execute();
+            stmt.close();
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
     }
 
     @Override
-    public void update(int id, Paciente newVar) {
+    public void update(Integer id, Paciente newVar) {
         String sql = "update Usuario set nome = ?, dataNascimento = ?, "
                 + "cpf = ?, telefone = ?, foto = ? where id = ?;";
         try{
@@ -82,20 +85,33 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente>{
             stmt.setString(4, newVar.getTelefone());
             stmt.setString(5, newVar.getFoto());
             stmt.setInt(6, id);
+            
+            stmt.execute();
+            stmt.close();
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
     }
 
     @Override
-    public void buscaPorId(int id) {
+    public Paciente buscaPorId(Integer id) {
         String sql = "select * from Paciente where id = ?";
+        Paciente paciente = null;
+        
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next())
+                paciente = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("data"), 
+                        rs.getString("cpf"), rs.getString("telefone"), rs.getString("foto"));
+            
         }catch(SQLException e){
             System.out.println("Error: " +e);
         }
+        
+        return paciente;
     }
     
 }
