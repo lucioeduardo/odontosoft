@@ -7,6 +7,7 @@ package odontosoft.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta_has_Procedimento;
@@ -19,10 +20,21 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
     ConexaoBanco conexao;
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
-    Consulta_has_Procedimento chs;
+    
     @Override
     public void inserir(Consulta_has_Procedimento var) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO Consulta_has_Procedimento(idConsulta, idProcedimento) VALUES (?,?);";
+        try{
+            stmt = connect.prepareStatement(sql);
+            stmt.setInt(1, var.getIdConsulta());
+            stmt.setInt(2, var.getIdProcedimento());
+            
+            stmt.execute();
+            stmt.close();
+            System.out.println("Dados inseridos no banco de dados!");
+        }catch(SQLException e){
+            System.out.println("Error: "+e);
+        }
     }
 
     @Override
