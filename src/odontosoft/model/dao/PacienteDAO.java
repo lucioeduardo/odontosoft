@@ -23,7 +23,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
 
-    public PacienteDAO(ConexaoBanco conexao, Paciente paciente) {
+    public PacienteDAO(ConexaoBanco conexao) {
         this.conexao = conexao;
     }
     
