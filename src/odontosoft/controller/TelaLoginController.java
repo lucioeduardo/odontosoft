@@ -20,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import odontosoft.model.dao.UsuarioDAO;
@@ -91,8 +93,14 @@ public class TelaLoginController implements Initializable {
         }else{
             lblErroLogin.setOpacity(1);
         }
-        
-        
-        
     }
+    
+    public void telaLoginKeyPressed(KeyEvent e){
+        if(e.getCode() == KeyCode.ENTER){
+            clickBtnEntrar(null);
+        }
+    }
+    
+    
+    
 }
