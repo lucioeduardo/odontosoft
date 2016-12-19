@@ -5,18 +5,20 @@
  */
 package odontosoft.model.domain;
 
+import java.sql.Date;
+
 /**
  *
  * @author Aluno
  */
 public class Funcionario {
     private String nome,cpf,rg,telefone;
-    private String dataNascimento;
+    private Date dataNascimento;
     private boolean Gerente;
     private int id;
     private double salario;
 
-    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario, String dataNascimento, boolean Gerente) {
+    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario, Date dataNascimento, boolean Gerente) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
@@ -83,11 +85,11 @@ public class Funcionario {
         this.salario = salario;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }            
 }
