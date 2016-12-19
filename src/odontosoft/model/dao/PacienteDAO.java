@@ -19,7 +19,7 @@ import odontosoft.model.domain.Paciente;
  * @author Aluno
  */
 public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
-    ConexaoBanco conexao;
+    ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
 
