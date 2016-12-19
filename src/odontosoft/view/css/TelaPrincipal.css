@@ -7,7 +7,6 @@
     -fx-cursor: hand;
 }
 
-.split-pane-divider {
-   -fx-background-color: transparent;
-   -fx-padding: 0 1 0 1;
+.imgSair:hover{
+    -fx-cursor: hand;
 }
