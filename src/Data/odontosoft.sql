@@ -56,3 +56,12 @@ CREATE TABLE IF NOT EXISTS Consulta_has_Procedimento(
 	REFERENCES Procedimento(id),
     PRIMARY KEY (idConsulta, idProcedimento)
 );
+
+/*DELIMITER //
+CREATE FUNCTION returnId (_cpf varchar(11)) RETURNS INT
+	BEGIN
+	
+    RETURN (SELECT id FROM Funcionario WHERE cpf = _cpf);
+    END
+//
+DELIMITER ;*/
