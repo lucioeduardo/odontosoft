@@ -72,9 +72,7 @@ public class TelaLoginController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaPrincipal.fxml"));
                 Parent root = fxmlLoader.load();
                 TelaPrincipalController controller = fxmlLoader.getController();
-                controller.setUser(user);
-                
-                System.out.println("Hello");
+                controller.setUser(user);                
                 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
