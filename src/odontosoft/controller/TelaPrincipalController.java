@@ -5,18 +5,23 @@
  */
 package odontosoft.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import odontosoft.model.dao.FuncionarioDAO;
 import odontosoft.model.domain.Funcionario;
 import odontosoft.model.domain.Usuario;
@@ -33,7 +38,8 @@ public class TelaPrincipalController implements Initializable {
     private Label lblNome,lblHorario;
     @FXML
     private ImageView imgViewSair;
-    
+    @FXML
+    private BorderPane borderPane;
     
     /**
      * Initializes the controller class.
@@ -46,10 +52,7 @@ public class TelaPrincipalController implements Initializable {
         
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void run() {
-                
-                System.out.println("Executou!");
-                
+            public void run() {                
                 Platform.runLater(() -> lblHorario.setText(getHora()));
                 
             }
@@ -65,9 +68,11 @@ public class TelaPrincipalController implements Initializable {
     public void setUser(Usuario user) {
         this.user = user;
         
-        //Funcionario f = new FuncionarioDAO().buscaPorId(user.getIdFuncionario());
         
-        lblNome.setText(user.getId());
+        Funcionario f = new FuncionarioDAO().buscaPorId(user.getIdFuncionario());
+        if(f == null) System.out.println("deu null");
+        
+        lblNome.setText(f.getNome());
     }
     
     @FXML
@@ -87,6 +92,14 @@ public class TelaPrincipalController implements Initializable {
         System.exit(0);
     }
     
+    @FXML
+    public void btnMenuLateralPacientesClick(){
+        try {
+            borderPane.setCenter(FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLPacientes.fxml")));
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public String getHora(){
         Calendar cal = new GregorianCalendar();
