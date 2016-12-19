@@ -43,7 +43,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             stmt = connect.prepareStatement(sql);
             stmt.setInt(1, paciente.getId());
             stmt.setInt(2, funcionario.getId());
-            stmt.setDate(3, var.getData());
+            stmt.setString(3, var.getData());
             
             stmt.execute();
             stmt.close();
@@ -63,7 +63,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             query = stmt.executeQuery();
             
             while(query.next()){
-                list.add(new Consulta(query.getInt("idPaciente"), query.getInt("idFuncionario"), query.getDate("dataConsulta")));
+                list.add(new Consulta(query.getInt("idPaciente"), query.getInt("idFuncionario"), query.getString("dataConsulta")));
                 
             }
             query.close();
@@ -117,7 +117,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
-                var = new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), rs.getDate("dataConsulta"));
+                var = new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), rs.getString("dataConsulta"));
             }
             rs.close();
             stmt.close();
