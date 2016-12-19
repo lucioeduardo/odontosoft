@@ -52,11 +52,11 @@ public class Paciente {
         this.telefone = telefone;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
