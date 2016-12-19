@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS odontosoft;
 USE odontosoft;
 
-CREATE TABLE Paciente(
+CREATE TABLE IF NOT EXISTS Paciente(
     id int primary key auto_increment,
     nome varchar(100) not null,
     dataNascimento date not null,
@@ -10,7 +10,7 @@ CREATE TABLE Paciente(
     foto varchar(45) not null
 );
 
-CREATE TABLE Funcionario(
+CREATE TABLE IF NOT EXISTS Funcionario(
     id int primary key auto_increment,
     nome varchar(100) not null,
     cpf varchar(11) not null unique,
@@ -21,13 +21,13 @@ CREATE TABLE Funcionario(
     isGerente bool not null  
 );
 
-CREATE TABLE Procedimento(
+CREATE TABLE IF NOT EXISTS Procedimento(
     id int primary key auto_increment,
     descricao varchar(100) not null,
     preco double not null
 );
 
-CREATE TABLE Usuario(
+CREATE TABLE IF NOT EXISTS Usuario(
     id varchar(50) not null unique primary key,
     senha varchar(45) not null,
     idFuncionario int not null,
@@ -35,7 +35,7 @@ CREATE TABLE Usuario(
 	REFERENCES Funcionario(id)
 );
 
-CREATE TABLE Consulta(
+CREATE TABLE IF NOT EXISTS Consulta(
     id int primary key auto_increment,
     idPaciente int not null,
     idFuncionario int not null,
@@ -46,7 +46,7 @@ CREATE TABLE Consulta(
 	REFERENCES Funcionario(id)
 );
 
-CREATE TABLE Consulta_has_Procedimento(
+CREATE TABLE IF NOT EXISTS Consulta_has_Procedimento(
     idConsulta int not null,
     idProcedimento int not null,
     FOREIGN KEY (idConsulta)
