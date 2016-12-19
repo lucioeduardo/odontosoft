@@ -34,7 +34,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label text="Nome de usuario" />
-                        <TextField fx:id="txtFieldNomeUsuario" prefWidth="358.0">
+                        <TextField fx:id="txtFieldNomeUsuario" onKeyPressed="#telaLoginKeyPressed" prefWidth="358.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -44,7 +44,7 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label text="Senha" />
-                        <PasswordField fx:id="txtFieldSenha">
+                        <PasswordField fx:id="txtFieldSenha" onKeyPressed="#telaLoginKeyPressed">
                            <font>
                               <Font size="16.0" />
                            </font>
