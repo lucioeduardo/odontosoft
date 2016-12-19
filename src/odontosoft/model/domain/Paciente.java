@@ -1,14 +1,17 @@
 package odontosoft.model.domain;
 
+import java.sql.Date;
+
 public class Paciente {
-    private String nome,cpf,telefone, data, foto;
+    private String nome,cpf,telefone, foto;
+    private Date data;
     private int id;
     
     public Paciente () {
         
     }
     
-    public Paciente (int id, String nome, String data, String cpf, String telefone, String foto) {
+    public Paciente (int id, String nome, Date data, String cpf, String telefone, String foto) {
         this.nome = nome;
         this.id = id;
         this.data = data;
