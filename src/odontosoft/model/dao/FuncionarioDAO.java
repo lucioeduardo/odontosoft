@@ -7,7 +7,7 @@ import odontosoft.model.database.ConexaoBanco;
 import java.lang.*;
 
 public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>{
-    ConexaoBanco conexao;
+    ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
     Funcionario func;
@@ -20,7 +20,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             stmt.setString(1, func.getNome());
             stmt.setString(2, func.getCpf());
             stmt.setString(3, func.getTelefone());
-            stmt.setString(4, func.getDataNascimento());
+            stmt.setDate(4, func.getDataNascimento());
             stmt.setString(5, func.getRg());
             stmt.setDouble(6, func.getSalario());
             stmt.setBoolean(7, func.isGerente());
@@ -46,7 +46,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             
             while(query.next()){
                 //id, nome, cpf, rg, telefone, salario, dataNascimento, Gerente
-                list.add(new Funcionario(query.getInt(1), query.getString(2), query.getString(3), query.getString(4), query.getString(5), query.getDouble(6), query.getString(7), query.getBoolean(8)));            
+                list.add(new Funcionario(query.getInt(1), query.getString(2), query.getString(3), query.getString(4), query.getString(5), query.getDouble(6), query.getDate(7), query.getBoolean(8)));            
             }
             query.close();
             stmt.close();
@@ -85,7 +85,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             stmt.setString(3, newVar.getRg());
             stmt.setString(4, newVar.getTelefone());
             stmt.setDouble(5, newVar.getSalario());
-            stmt.setString(6, newVar.getDataNascimento());
+            stmt.setDate(6, newVar.getDataNascimento());
             stmt.setBoolean(7, newVar.isGerente());
                         
             stmt.setInt(8, id);
@@ -111,7 +111,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             while(rs.next()){
                 // id, nome, cpf, rg, telefone, salario, dataNascimento, Gerente
                 funcionario = new Funcionario(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), 
-                        rs.getString("rg"), rs.getString("telefone"), rs.getDouble("salario"), rs.getString("dataNascimento"), rs.getBoolean("isGerente"));
+                        rs.getString("rg"), rs.getString("telefone"), rs.getDouble("salario"), rs.getDate("dataNascimento"), rs.getBoolean("isGerente"));
             }
             rs.close();
             stmt.close();
