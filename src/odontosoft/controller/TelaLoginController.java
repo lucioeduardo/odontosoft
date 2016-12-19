@@ -7,10 +7,6 @@ package odontosoft.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,11 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -45,6 +40,8 @@ public class TelaLoginController implements Initializable {
     TextField txtFieldNomeUsuario,txtFieldSenha;
     @FXML
     Button btnEntrar;
+    @FXML
+    Label lblErroLogin;
     
     ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
@@ -60,7 +57,7 @@ public class TelaLoginController implements Initializable {
     
     @FXML
     public void clickBtnEntrar(ActionEvent event){
-        
+        lblErroLogin.setOpacity(0);
         
         Stage stage = (Stage)borderPane.getScene().getWindow();
         
@@ -68,15 +65,10 @@ public class TelaLoginController implements Initializable {
         String senhaInformada = txtFieldSenha.getText();
         
         Usuario user = new UsuarioDAO(connect).buscaPorId(idInformado);
-        
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Conexão");
+       
         
         if(senhaInformada.equals(user.getSenha())){
-            try {
-                alert.setContentText("Conexão realizada com sucesso!");
-                alert.showAndWait();
-                
+            try {         
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaPrincipal.fxml"));
                 Parent root = fxmlLoader.load();
                 TelaPrincipalController controller = fxmlLoader.getController();
@@ -99,8 +91,7 @@ public class TelaLoginController implements Initializable {
             }
             
         }else{
-            alert.setContentText("Usuario ou senha incorreto(s)!");
-            alert.showAndWait();
+            lblErroLogin.setOpacity(1);
         }
         
         
