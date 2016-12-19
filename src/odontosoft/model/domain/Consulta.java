@@ -5,6 +5,8 @@
  */
 package odontosoft.model.domain;
 
+import java.sql.Date;
+
 
 /**
  *
@@ -13,9 +15,9 @@ package odontosoft.model.domain;
 public class Consulta {
     private int paciente;
     private int dentista;
-    private String data;
+    private Date data;
 
-    public Consulta(int paciente, int dentista, String data) {
+    public Consulta(int paciente, int dentista, Date data) {
         this.dentista = dentista;
         this.paciente = paciente;
         this.data = data;
@@ -38,11 +40,11 @@ public class Consulta {
         this.paciente = paciente;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
     
