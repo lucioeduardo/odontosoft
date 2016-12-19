@@ -64,6 +64,14 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </VBox>
+            <Label fx:id="lblErroLogin" opacity="0.0" text="Nome de usuário ou senha incorreto(s)." textFill="RED">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="-15.0" />
+               </VBox.margin>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets />
