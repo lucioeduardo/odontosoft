@@ -36,7 +36,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, var.getNome());
-            stmt.setString(2, var.getData());
+            stmt.setDate(2, var.getData());
             stmt.setString(3, var.getCpf());
             stmt.setString(4, var.getTelefone());
             stmt.setString(5, var.getFoto());
@@ -60,7 +60,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             
             while(query.next()){
                 //id, nome, dataNascimento, CPF, Telefone, Caminho da Foto
-                list.add(new Paciente(query.getInt(1), query.getString(2), query.getString(3),
+                list.add(new Paciente(query.getInt(1), query.getString(2), query.getDate(3),
                         query.getString(4), query.getString(5), query.getString(6)));
             }
             query.close();
@@ -93,7 +93,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, newVar.getNome());
-            stmt.setString(2, newVar.getData());
+            stmt.setDate(2, newVar.getData());
             stmt.setString(3, newVar.getCpf());
             stmt.setString(4, newVar.getTelefone());
             stmt.setString(5, newVar.getFoto());
@@ -118,7 +118,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
-                var = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("data"), 
+                var = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getDate("data"), 
                         rs.getString("cpf"), rs.getString("telefone"), rs.getString("foto"));
             }
             rs.close();
