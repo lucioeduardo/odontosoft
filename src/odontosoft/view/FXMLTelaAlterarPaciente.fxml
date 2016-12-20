@@ -89,7 +89,7 @@
       <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <Button fx:id="btnCancelar" mnemonicParsing="false" onMouseClicked="#btnCancelarClicked" styleClass="danger" text="Cancelar" />
-            <Button fx:id="btnAlterar" mnemonicParsing="false" onMouseClicked="#btnAlterar" styleClass="success" text="Alterar" />
+            <Button fx:id="btnSalvar" mnemonicParsing="false" onMouseClicked="#btnSalvarClicked" styleClass="success" text="Salvar" />
          </children>
          <padding>
             <Insets right="10.0" />

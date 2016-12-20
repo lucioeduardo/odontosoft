@@ -132,8 +132,4 @@ public class PacientesController implements Initializable {
         carregarTableViewPacientes();
     }
     
-    public Paciente getPacienteSelecionado(){
-        return pacienteSelecionado;
-    }
-    
 }
