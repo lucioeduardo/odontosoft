@@ -95,7 +95,8 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     public void btnMenuLateralPacientesClick(){
         try {
-            borderPane.setCenter(FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLPacientes.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLPacientes.fxml"));
+            borderPane.setCenter(fxmlLoader.load());
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
