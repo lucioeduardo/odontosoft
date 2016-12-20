@@ -6,8 +6,7 @@ CREATE TABLE IF NOT EXISTS Paciente(
     nome varchar(100) not null,
     dataNascimento date not null,
     cpf varchar(11) not null unique,
-    telefone varchar(11) not null unique,
-    foto varchar(45) not null
+    telefone varchar(11) not null unique
 );
 
 CREATE TABLE IF NOT EXISTS Funcionario(
