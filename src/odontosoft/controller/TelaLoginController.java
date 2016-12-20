@@ -78,8 +78,8 @@ public class TelaLoginController implements Initializable {
                 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setFullScreen(false);
-                stage.setResizable(true);
+                //stage.setFullScreen(false);
+                //stage.setResizable(true);
                 scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
                 scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/TelaPrincipal.css").toExternalForm());
                 
