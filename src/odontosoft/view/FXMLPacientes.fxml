@@ -48,7 +48,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="btnAdicionarPaciente" mnemonicParsing="false" onMouseClicked="#btnAdicionarPacienteClicked" styleClass="success" text="Adicionar" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnAlterarPaciente" mnemonicParsing="false" styleClass="primary" text="Alterar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnAlterarPaciente" mnemonicParsing="false" onMouseClicked="#btnAlterarPacienteClicked" styleClass="primary" text="Alterar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                   <Button fx:id="btnRemoverPaciente" mnemonicParsing="false" onMouseClicked="#btnRemoverPacienteClicked" styleClass="danger" text="Remover" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
