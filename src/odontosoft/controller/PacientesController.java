@@ -50,8 +50,6 @@ public class PacientesController implements Initializable {
     @FXML
     private Label lblNomePaciente,lblTelefonePaciente,lblCpfPaciente,lblDataNascimentoPaciente;
     @FXML
-    private ImageView imgViewfotoCliente;
-    @FXML
     private Button btnAdicionarPaciente,btnAlterarPaciente,btnRemoverPaciente;
     
     
@@ -83,7 +81,6 @@ public class PacientesController implements Initializable {
         lblDataNascimentoPaciente.setText(paciente.getData().toString());
         lblCpfPaciente.setText(paciente.getCpf());
         lblTelefonePaciente.setText(paciente.getTelefone());
-        imgViewfotoCliente.setImage(new Image(getClass().getResourceAsStream(paciente.getFoto())));
     }
     
     @FXML
@@ -101,6 +98,28 @@ public class PacientesController implements Initializable {
         try {
             System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarPaciente.fxml"));
             Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarPaciente.fxml"));
+            Scene scene = new Scene(parent);
+            modal.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
+        } catch (IOException ex) {
+            Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        modal.setTitle("Cadastrar Paciente");
+        modal.centerOnScreen();
+        modal.initOwner(lblNomePaciente.getScene().getWindow());
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.showAndWait();
+        
+        carregarTableViewPacientes();
+    }
+    @FXML
+    public void btnAlterarPacienteClicked(){
+        Stage modal = new Stage();
+        
+        try {
+            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarPaciente.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
             Scene scene = new Scene(parent);
             modal.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
