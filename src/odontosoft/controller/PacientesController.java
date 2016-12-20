@@ -41,11 +41,9 @@ public class PacientesController implements Initializable {
      */
     
     @FXML
-    private TableColumn tableColumnPacienteNome,tableColumnPacienteTelefone;
+    private TableColumn tableColumnPacienteNome,tableColumnPacienteTelefone,tableColumnPacienteCpf,tableColumnPacienteDataNascimento;
     @FXML
     private TableView<Paciente> tableViewPacientes;
-    @FXML
-    private Label lblNomePaciente,lblTelefonePaciente,lblCpfPaciente,lblDataNascimentoPaciente;
     @FXML
     private Button btnAdicionarPaciente,btnAlterarPaciente,btnRemoverPaciente;
     
@@ -65,6 +63,8 @@ public class PacientesController implements Initializable {
     public void carregarTableViewPacientes(){
         tableColumnPacienteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnPacienteTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        tableColumnPacienteCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        tableColumnPacienteDataNascimento.setCellValueFactory(new PropertyValueFactory("data"));
         
         List<Paciente> listPacientes = pacienteDAO.listar();
         ObservableList<Paciente> observableListPacientes = FXCollections.observableArrayList(listPacientes);
@@ -73,11 +73,6 @@ public class PacientesController implements Initializable {
     
     public void selecionarItemTableViewPacientes(Paciente paciente){
         this.pacienteSelecionado=paciente;
-        
-        lblNomePaciente.setText(paciente.getNome());
-        lblDataNascimentoPaciente.setText(paciente.getData().toString());
-        lblCpfPaciente.setText(paciente.getCpf());
-        lblTelefonePaciente.setText(paciente.getTelefone());
     }
     
     @FXML
@@ -104,7 +99,7 @@ public class PacientesController implements Initializable {
         
         modal.setTitle("Cadastrar Paciente");
         modal.centerOnScreen();
-        modal.initOwner(lblNomePaciente.getScene().getWindow());
+        modal.initOwner(btnAdicionarPaciente.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
         modal.showAndWait();
         
@@ -126,7 +121,7 @@ public class PacientesController implements Initializable {
         
         modal.setTitle("Cadastrar Paciente");
         modal.centerOnScreen();
-        modal.initOwner(lblNomePaciente.getScene().getWindow());
+        modal.initOwner(btnAlterarPaciente.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
         modal.showAndWait();
         
