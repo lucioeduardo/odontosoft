@@ -75,11 +75,10 @@ public class TelaAdicionarPacienteController implements Initializable {
         Date dataNasc = Date.valueOf(datePickerDataNascPaciente.getValue());
         String cpf = txtFieldCpfPaciente.getText();
         String telefone = txtFieldTelefonePaciente.getText();
-        String foto = txtFieldFotoPaciente.getText();
         
         System.out.println("chegou aqui!");
         
-        Paciente p = new Paciente(0, nome, dataNasc, cpf, telefone, foto);
+        Paciente p = new Paciente(0, nome, dataNasc, cpf, telefone);
         
         PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
         pacienteDao.inserir(p);
@@ -89,4 +88,10 @@ public class TelaAdicionarPacienteController implements Initializable {
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
         stage.close();
     }
+    
+    public void btnCancelarClicked(){
+        Stage stage = (Stage)btnCancelar.getScene().getWindow();
+        stage.close();
+    }
+    
 }
