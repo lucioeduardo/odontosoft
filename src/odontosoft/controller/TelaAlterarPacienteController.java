@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import odontosoft.model.dao.PacienteDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Paciente;
+import odontosoft.model.domain.Usuario;
 
 /**
  * FXML Controller class
@@ -26,8 +27,7 @@ import odontosoft.model.domain.Paciente;
  */
 public class TelaAlterarPacienteController implements Initializable {
 
-    public static PacientesController pController; 
-    
+    private Paciente paciente;    
     
     @FXML
     private Button btnSalvar,btnCancelar;
@@ -37,15 +37,24 @@ public class TelaAlterarPacienteController implements Initializable {
     @FXML
     private DatePicker datePickerDataNascPaciente;
     
+    PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
-        txtFieldNomePaciente.setText(pacienteDao.buscaPorId(pController.getPacienteSelecionado().getId()).getNome());
-        txtFieldTelefonePaciente.setText(pacienteDao.buscaPorId(pController.getPacienteSelecionado().getId()).getTelefone());
-        txtFieldCpfPaciente.setText(pacienteDao.buscaPorId(pController.getPacienteSelecionado().getId()).getCpf());
         
-    }   
+        txtFieldNomePaciente.setText(paciente.getNome());
+        txtFieldTelefonePaciente.setText(paciente.getTelefone());
+        txtFieldCpfPaciente.setText(paciente.getCpf());
+        
+    }
+    
+    public void setPaciente(Paciente paciente){
+        this.paciente = paciente;
+    }
+    public Paciente getPaciente(){
+        return paciente;
+    }
     
     public void btnAlterar(){
         
@@ -59,8 +68,7 @@ public class TelaAlterarPacienteController implements Initializable {
         
         Paciente p = new Paciente(0, nome, dataNasc, cpf, telefone);
         
-        PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
-        pacienteDao.inserir(p);
+        pacienteDao.update(paciente.getId(), p);
         
         System.out.println("chegou aqui!");
         
