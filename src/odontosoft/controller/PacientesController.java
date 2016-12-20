@@ -12,9 +12,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import odontosoft.model.dao.PacienteDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Paciente;
@@ -34,6 +37,10 @@ public class PacientesController implements Initializable {
     private TableColumn tableColumnPacienteNome,tableColumnPacienteTelefone;
     @FXML
     private TableView<Paciente> tableViewPacientes;
+    @FXML
+    private Label lblNomePaciente,lblTelefonePaciente,lblCpfPaciente,lblDataNascimentoPaciente;
+    @FXML
+    private ImageView imgViewfotoCliente;
     
     private final ConexaoBanco conexao = new ConexaoBanco();
     private PacienteDAO pacienteDAO = new PacienteDAO(conexao);
@@ -41,16 +48,25 @@ public class PacientesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         carregarTableViewPacientes();
+        
+        tableViewPacientes.getSelectionModel().selectedItemProperty().addListener(
+        (observable,odlValue,newValue) -> selecionarItemTableViewPacientes(newValue));
     }    
     
     public void carregarTableViewPacientes(){
-        
-        
         tableColumnPacienteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnPacienteTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         
         List<Paciente> listPacientes = pacienteDAO.listar();
         ObservableList<Paciente> observableListPacientes = FXCollections.observableArrayList(listPacientes);
         tableViewPacientes.setItems(observableListPacientes);
+    }
+    
+    public void selecionarItemTableViewPacientes(Paciente paciente){
+        lblNomePaciente.setText(paciente.getNome());
+        lblDataNascimentoPaciente.setText(paciente.getData().toString());
+        lblCpfPaciente.setText(paciente.getCpf());
+        lblTelefonePaciente.setText(paciente.getTelefone());
+        imgViewfotoCliente.setImage(new Image(getClass().getResourceAsStream(paciente.getFoto())));
     }
 }
