@@ -32,7 +32,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     @Override
     public void inserir(Paciente var) {
         String sql = "INSERT INTO Paciente(nome, dataNascimento, cpf, telefone) VALUES"
-                + "(?,?,?,?,?);";
+                + "(?,?,?,?);";
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, var.getNome());
