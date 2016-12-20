@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Consulta(
     id int primary key auto_increment,
     idPaciente int not null,
     idFuncionario int not null,
-    dataConsulta date,
+    dataConsulta datetime,
     FOREIGN KEY (idPaciente)
 	REFERENCES Paciente(id),
     FOREIGN KEY (idFuncionario)
