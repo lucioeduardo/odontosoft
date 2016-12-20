@@ -5,7 +5,7 @@
  */
 package odontosoft.model.domain;
 
-import java.sql.Date;
+import java.util.Calendar;
 
 
 /**
@@ -15,9 +15,12 @@ import java.sql.Date;
 public class Consulta {
     private int paciente;
     private int dentista;
-    private Date data;
+    private Calendar data;
+    
+    
+    
 
-    public Consulta(int paciente, int dentista, Date data) {
+    public Consulta(int paciente, int dentista, Calendar data) {
         this.dentista = dentista;
         this.paciente = paciente;
         this.data = data;
@@ -40,11 +43,11 @@ public class Consulta {
         this.paciente = paciente;
     }
 
-    public Date getData() {
+    public Calendar getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(Calendar data) {
         this.data = data;
     }
     
