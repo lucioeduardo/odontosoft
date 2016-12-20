@@ -5,7 +5,6 @@
  */
 package odontosoft.controller;
 
-import java.io.File;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
