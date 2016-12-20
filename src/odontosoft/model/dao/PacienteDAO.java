@@ -31,7 +31,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     
     @Override
     public void inserir(Paciente var) {
-        String sql = "INSERT INTO Paciente(nome, dataNascimento, cpf, telefone, foto) VALUES"
+        String sql = "INSERT INTO Paciente(nome, dataNascimento, cpf, telefone) VALUES"
                 + "(?,?,?,?,?);";
         try{
             stmt = connect.prepareStatement(sql);
@@ -39,7 +39,6 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             stmt.setDate(2, var.getData());
             stmt.setString(3, var.getCpf());
             stmt.setString(4, var.getTelefone());
-            stmt.setString(5, var.getFoto());
             
             stmt.execute();
             stmt.close();
@@ -61,7 +60,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             while(query.next()){
                 //id, nome, dataNascimento, CPF, Telefone, Caminho da Foto
                 list.add(new Paciente(query.getInt(1), query.getString(2), query.getDate(3),
-                        query.getString(4), query.getString(5), query.getString(6)));
+                        query.getString(4), query.getString(5)));
             }
             query.close();
             stmt.close();
@@ -89,14 +88,13 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     @Override
     public void update(Integer id, Paciente newVar) {
         String sql = "UPDATE Usuario SET nome = ?, dataNascimento = ?, "
-                + "cpf = ?, telefone = ?, foto = ? WHERE id = ?;";
+                + "cpf = ?, telefone = ? WHERE id = ?;";
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, newVar.getNome());
             stmt.setDate(2, newVar.getData());
             stmt.setString(3, newVar.getCpf());
             stmt.setString(4, newVar.getTelefone());
-            stmt.setString(5, newVar.getFoto());
             stmt.setInt(6, id);
             
             stmt.execute();
@@ -119,7 +117,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             
             while(rs.next()){
                 var = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getDate("data"), 
-                        rs.getString("cpf"), rs.getString("telefone"), rs.getString("foto"));
+                        rs.getString("cpf"), rs.getString("telefone"));
             }
             rs.close();
             stmt.close();
