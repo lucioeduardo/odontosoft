@@ -15,12 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import odontosoft.model.dao.PacienteDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Paciente;
@@ -36,38 +31,14 @@ public class TelaAdicionarPacienteController implements Initializable {
     private Button btnSalvar,btnCancelar;
     @FXML
     private TextField txtFieldNomePaciente,txtFieldTelefonePaciente
-            ,txtFieldCpfPaciente,txtFieldFotoPaciente;
+            ,txtFieldCpfPaciente;
     @FXML
     private DatePicker datePickerDataNascPaciente;
-    @FXML
-    private ImageView imgViewFileChooserFotoPaciente;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-
-    public void imgViewFileChooserMouseEntered(){
-        Image image = new Image(getClass().getResourceAsStream("/odontosoft/view/img/fileChooserHovered.png"));
-        imgViewFileChooserFotoPaciente.setImage(image);
-    }
-    
-    public void imgViewFileChooserMouseExited(){
-        Image image = new Image(getClass().getResourceAsStream("/odontosoft/view/img/fileChooserPadrao.png"));
-        imgViewFileChooserFotoPaciente.setImage(image);
-    }
-    
-    public void imgViewFileChooserMouseClicked(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().addAll(
-                new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
-        );
-        Window mainStage = imgViewFileChooserFotoPaciente.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(mainStage);
-        txtFieldFotoPaciente.setText(selectedFile.getAbsolutePath());
-    }
-    
+    }   
     
     public void btnSalvarClicked(){
         //Atributos da classe cliente
