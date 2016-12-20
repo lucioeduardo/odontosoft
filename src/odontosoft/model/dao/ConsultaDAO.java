@@ -13,7 +13,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta;
@@ -43,7 +46,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             stmt = connect.prepareStatement(sql);
             stmt.setInt(1, paciente.getId());
             stmt.setInt(2, funcionario.getId());
-            stmt.setDate(3, var.getData());
+            stmt.setTimestamp(3, new Timestamp(var.getData().getTimeInMillis()));
             
             stmt.execute();
             stmt.close();
@@ -55,18 +58,21 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
 
     @Override
     public List<Consulta> listar() {
-        ResultSet query;
+        ResultSet rs;
         List<Consulta> list = new ArrayList<>();
         String sql = "SELECT * FROM Consulta";
         try{
             stmt = connect.prepareStatement(sql);
-            query = stmt.executeQuery();
+            rs = stmt.executeQuery();
             
-            while(query.next()){
-                list.add(new Consulta(query.getInt("idPaciente"), query.getInt("idFuncionario"), query.getDate("dataConsulta")));
+            while(rs.next()){
+                Calendar data = new GregorianCalendar();
+                data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
+                
+                list.add(new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data));
                 
             }
-            query.close();
+            rs.close();
             stmt.close();
         }catch(SQLException e){
             System.out.println("Error: " +e);
@@ -117,7 +123,10 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
-                var = new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), rs.getDate("dataConsulta"));
+                Calendar data = new GregorianCalendar();
+                data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
+                
+                var = new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data);
             }
             rs.close();
             stmt.close();
