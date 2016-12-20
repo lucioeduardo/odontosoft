@@ -110,16 +110,20 @@ public class PacientesController implements Initializable {
         Stage modal = new Stage();
         
         try {
-            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarPaciente.fxml"));
-            Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
+            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
+            FXMLLoader fxmlloader = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
+            Parent parent = fxmlloader.load();
+            TelaAlterarPacienteController controller = fxmlloader.getController();
+            controller.setPaciente(pacienteSelecionado);
+            
             Scene scene = new Scene(parent);
             modal.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
         } catch (IOException ex) {
             Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        modal.setTitle("Cadastrar Paciente");
+       
+        modal.setTitle("Alterar Paciente");
         modal.centerOnScreen();
         modal.initOwner(btnAlterarPaciente.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
@@ -128,6 +132,8 @@ public class PacientesController implements Initializable {
         carregarTableViewPacientes();
     }
     
-    
+    public Paciente getPacienteSelecionado(){
+        return pacienteSelecionado;
+    }
     
 }
