@@ -16,3 +16,14 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
          
 }
+
+.lblInfo{
+    -fx-font-size:16;
+}
+
+.vboxInfo {
+    -fx-effect: dropshadow(three-pass-box, rgba(3,58,211,0.3), 10, 0, 0, 0);
+
+    -fx-border-color:#039ed3;
+    -fx-border-width:1.5px;
+}
