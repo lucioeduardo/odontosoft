@@ -15,10 +15,11 @@ public class Funcionario {
     private String nome,cpf,rg,telefone;
     private Date dataNascimento;
     private boolean Gerente;
+    private boolean Dentista;
     private int id;
     private double salario;
 
-    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario, Date dataNascimento, boolean Gerente) {
+    public Funcionario(int id, String nome, String cpf, String rg, String telefone, double salario, Date dataNascimento, boolean Gerente, boolean Dentista) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
@@ -27,6 +28,7 @@ public class Funcionario {
         this.salario = salario;
         this.dataNascimento = dataNascimento;
         this.Gerente = Gerente;
+        this.Dentista = Dentista;
     }
 
     public boolean isGerente() {
@@ -91,5 +93,15 @@ public class Funcionario {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }            
+    }        
+
+    public boolean isDentista() {
+        return Dentista;
+    }
+
+    public void setDentista(boolean Dentista) {
+        this.Dentista = Dentista;
+    }
+    
+    
 }
