@@ -14,8 +14,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import odontosoft.model.dao.FuncionarioDAO;
 import odontosoft.model.dao.PacienteDAO;
 import odontosoft.model.database.ConexaoBanco;
+import odontosoft.model.domain.Funcionario;
 import odontosoft.model.domain.Paciente;
 
 public class TelaAdicionarConsultaController implements Initializable {
@@ -29,7 +31,8 @@ public class TelaAdicionarConsultaController implements Initializable {
     @FXML
     private ComboBox cmbBoxDentista, cmbBoxPaciente;
     private final PacienteDAO pa = new PacienteDAO(new ConexaoBanco());
-    
+    private final FuncionarioDAO fa = new FuncionarioDAO(new ConexaoBanco());
+           
     @FXML
     private DatePicker datePickerDataConsulta;
     
@@ -41,11 +44,13 @@ public class TelaAdicionarConsultaController implements Initializable {
     
     public void completeComboBox () {
         List <Paciente> lista = pa.listar();
-        ObservableList<Paciente> listaPaciente = FXCollections.observableArrayList(lista);
-        System.out.println(listaPaciente.size() + " x  " + lista.size());
-        cmbBoxPaciente.setItems(listaPaciente);
-       
+        ObservableList<Paciente> listaPaciente = FXCollections.observableArrayList(lista);        
+        cmbBoxPaciente.setItems(listaPaciente);   
         
+        List <Funcionario> listaf = fa.listarDentista();
+        ObservableList <Funcionario> listaDentista = FXCollections.observableArrayList(listaf);
+        System.out.println(listaDentista.size());
+        cmbBoxDentista.setItems(listaDentista);           
     }
     
     public void btnSalvarClicked(){
