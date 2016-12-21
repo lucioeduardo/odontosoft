@@ -153,7 +153,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
 
                 String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + data.get(Calendar.MONTH)
                         + "/" + data.get(Calendar.YEAR);
-                String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
+                String horario = data.get(Calendar.HOUR_OF_DAY) + ":" + data.get(Calendar.MINUTE);
 
                 list.add(new ConsultaAgenda(nomePaciente, nomeDentista, dataStr, horario));
             }
