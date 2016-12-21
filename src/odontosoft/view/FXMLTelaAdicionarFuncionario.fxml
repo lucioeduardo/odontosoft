@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.TelaAdicionarFuncionarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.TelaAdicionarFuncionarioController">
    <top>
       <Label alignment="TOP_LEFT" text="Dados do funcionario" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
@@ -33,8 +34,9 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="157.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="168.0" minHeight="0.0" prefHeight="99.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="168.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="290.0" spacing="5.0">
@@ -97,6 +99,26 @@
                <children>
                   <Label text="Salario" />
                   <TextField fx:id="txtFieldSalarioFuncionario" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="290.0" spacing="5.0" GridPane.rowIndex="3">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Usuário" />
+                  <TextField fx:id="txtFieldUsuarioFuncionario" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="290.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Senha" />
+                  <TextField fx:id="txtFieldSenhaFuncionario" />
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" top="10.0" />

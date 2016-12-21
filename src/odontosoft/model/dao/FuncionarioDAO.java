@@ -9,6 +9,8 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
     ConexaoBanco conexao;
     Connection connect;
     PreparedStatement stmt = null;
+    
+    private int idFuncionario;
 
     public FuncionarioDAO(ConexaoBanco conexao) {
         this.conexao = conexao;
@@ -16,7 +18,9 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
     }
    
     
-    
+    public int getId(){
+        return idFuncionario;
+    }
     
     @Override
     public void inserir(Funcionario var) {
@@ -31,8 +35,17 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             stmt.setDouble(6, var.getSalario());
             stmt.setBoolean(7, var.isGerente());
             stmt.setBoolean(8, var.isDentista());
-            
             stmt.execute();
+            
+            sql = "SELECT returnId(?);";
+            stmt = connect.prepareStatement(sql);
+            stmt.setString(1, var.getCpf());
+            ResultSet rs;
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                idFuncionario = rs.getInt(1);
+                
+            }
             stmt.close();
             
             System.out.println("Dados inseridos");
