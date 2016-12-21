@@ -102,6 +102,11 @@ public class Funcionario {
     public void setDentista(boolean Dentista) {
         this.Dentista = Dentista;
     }
+
+    @Override
+    public String toString() {
+        return  nome;
+    }
     
     
 }
