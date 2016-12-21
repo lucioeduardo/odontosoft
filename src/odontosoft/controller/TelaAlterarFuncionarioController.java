@@ -16,8 +16,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import odontosoft.model.dao.FuncionarioDAO;
+import odontosoft.model.dao.UsuarioDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Funcionario;
+import odontosoft.model.domain.Usuario;
 
 /**
  *
@@ -31,11 +33,15 @@ public class TelaAlterarFuncionarioController implements Initializable{
     
     @FXML
     private TextField txtFieldNomeFuncionario, txtFieldCpfFuncionario, txtFieldRgFuncionario, txtFieldSalarioFuncionario,
-            txtFieldTelefoneFuncionario;
+            txtFieldTelefoneFuncionario, txtFieldUsuarioFuncionario, txtFieldSenhaFuncionario;
    @FXML
    private CheckBox checkBoxGerente, checkBoxDentista;
    @FXML
    private DatePicker datePickerDataNascFuncionario;
+   
+   ConexaoBanco conexao = new ConexaoBanco();
+   private UsuarioDAO usuarioDao = new UsuarioDAO(conexao.getConexao());
+   private Usuario usuario;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,11 +50,14 @@ public class TelaAlterarFuncionarioController implements Initializable{
     
     public void setFuncionario(Funcionario funcionario){
         this.funcionario = funcionario;
+        usuario = usuarioDao.buscaPorIdInt(funcionario.getId());
         txtFieldNomeFuncionario.setText(funcionario.getNome());
         txtFieldCpfFuncionario.setText(funcionario.getCpf());
         txtFieldRgFuncionario.setText(funcionario.getRg());
         txtFieldSalarioFuncionario.setText(String.valueOf(funcionario.getSalario()));
         txtFieldTelefoneFuncionario.setText(funcionario.getTelefone());
+        txtFieldUsuarioFuncionario.setText(usuario.getId());
+        txtFieldSenhaFuncionario.setText(usuario.getSenha());
         
         datePickerDataNascFuncionario.setValue(funcionario.getDataNascimento().toLocalDate());
         checkBoxGerente.setSelected(funcionario.isGerente());
@@ -63,15 +72,16 @@ public class TelaAlterarFuncionarioController implements Initializable{
         double salario = Double.parseDouble(txtFieldSalarioFuncionario.getText());
         String telefone = txtFieldTelefoneFuncionario.getText();
         Date data = Date.valueOf(datePickerDataNascFuncionario.getValue());
+        usuario.setSenha(txtFieldSenhaFuncionario.getText());
         
         boolean gerente = checkBoxGerente.isSelected();
         boolean dentista = checkBoxDentista.isSelected();
         
         Funcionario f = new Funcionario(0, nome, cpf, rg, telefone, salario, data, gerente, dentista);
-        ConexaoBanco conexao = new ConexaoBanco();
         FuncionarioDAO funcionarioDao = new FuncionarioDAO(conexao);
-        
         funcionarioDao.update(funcionario.getId(), f);
+        
+        usuarioDao.update(usuario.getId(), usuario);
         
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
         stage.close();

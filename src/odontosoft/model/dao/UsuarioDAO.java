@@ -74,7 +74,7 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
 
     @Override
     public void update(String id, Usuario novoUsuario) {
-        String sql = "UPDATE Usuario SET id=?, nome=?, idFuncionario=? where id=?";
+        String sql = "UPDATE Usuario SET id = ?, senha = ?, idFuncionario=? where id=?";
         
         try {
             PreparedStatement stmt = conexao.prepareStatement(sql);
