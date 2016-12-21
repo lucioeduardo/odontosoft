@@ -19,12 +19,12 @@ import odontosoft.model.domain.Procedimento;
  * @author mikolaja
  */
 public class ProcedimentoDAO implements InterfaceGenericDAO<Procedimento, Integer>{
-    ConexaoBanco conexao;
+    ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
 
-    public ProcedimentoDAO(ConexaoBanco conexao) {
-        this.conexao = conexao;
+    public ProcedimentoDAO() {
+        
     }
     
     @Override
