@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,24 +35,40 @@ public class FXMLTelaAgendaController implements Initializable {
             ,tableColumnAgendaData,tableColumnAgendaHorario;
     @FXML
     private TableView<ConsultaAgenda> tableViewAgenda;
+    @FXML
+    private RadioButton radioBtnAgendaSemana,radioBtnAgendaDia;
+    
     
     ConsultaDAO consultaDao = new ConsultaDAO();
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        radioBtnAgendaDia.setSelected(true);
         carregarTableViewAgenda();
     }    
     
     public void carregarTableViewAgenda(){
-        
-        
         tableColumnAgendaPaciente.setCellValueFactory(new PropertyValueFactory<>("nomePaciente"));
         tableColumnAgendaDentista.setCellValueFactory(new PropertyValueFactory<>("nomeDentista"));
         tableColumnAgendaHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
         tableColumnAgendaData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
-        tableViewAgenda.setItems(consultaDao.getAgendaDoDia());
+        if(radioBtnAgendaDia.isSelected())tableViewAgenda.setItems(consultaDao.getAgendaDoDia());
+        else tableViewAgenda.setItems(consultaDao.getAgendaSemana());
+    }
+    
+    @FXML
+    public void radioBtnAgendaSemanaClicked(){
+        radioBtnAgendaSemana.setSelected(true);
+        radioBtnAgendaDia.setSelected(false);
+        carregarTableViewAgenda();
+    }
+    @FXML
+    public void radioBtnAgendaDiaClicked(){
+        radioBtnAgendaSemana.setSelected(false);
+        radioBtnAgendaDia.setSelected(true);
+        carregarTableViewAgenda();
     }
     
 }
