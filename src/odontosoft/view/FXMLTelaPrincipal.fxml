@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.TelaPrincipalController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.TelaPrincipalController">
    <top>
       <GridPane prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: #58abd7ff;" BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -105,19 +105,6 @@
                   <Label alignment="CENTER" text="Agenda" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="161.0" onMouseClicked="#btnMenuLateralFuncionariosClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
-               <children>
-                  <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/iconFuncionario.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="8.0" right="9.0" top="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label alignment="CENTER" text="Funcionarios" />
-               </children>
-            </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -142,6 +129,19 @@
                      </HBox.margin>
                   </ImageView>
                   <Label alignment="CENTER" text="Procedimentos" />
+               </children>
+            </HBox>
+            <HBox fx:id="btnMenuLateralFuncionarios" alignment="CENTER_LEFT" layoutX="10.0" layoutY="161.0" onMouseClicked="#btnMenuLateralFuncionariosClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iconFuncionario.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="8.0" right="9.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" text="Funcionarios" />
                </children>
             </HBox>
          </children>
