@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import odontosoft.model.dao.FuncionarioDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Funcionario;
@@ -32,16 +33,19 @@ import odontosoft.model.domain.Usuario;
  *
  * @author eduardo
  */
-public class TelaPrincipalController implements Initializable {
-    @FXML
-    private Usuario user;
+public class TelaPrincipalController implements Initializable {    
     @FXML
     private Label lblNome,lblHorario;
     @FXML
     private ImageView imgViewSair;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private HBox btnMenuLateralFuncionarios;
     
+    //0-Recepcionista 1-Dentista 2-Gerente
+    private Funcionario funcionario;
+    private Usuario user;
     /**
      * Initializes the controller class.
      */
@@ -74,6 +78,11 @@ public class TelaPrincipalController implements Initializable {
         if(f == null) System.out.println("deu null");
         
         lblNome.setText(f.getNome());
+        this.funcionario = f;
+        
+        if(!f.isGerente()){
+            btnMenuLateralFuncionarios.setVisible(false);
+        }
     }
     
     @FXML
