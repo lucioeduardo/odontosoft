@@ -7,11 +7,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="490.0" prefWidth="694.0" stylesheets="@css/fxmlpacientes.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.FuncionariosController">
+<GridPane prefHeight="490.0" prefWidth="694.0" stylesheets="@css/fxmlpacientes.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.FuncionariosController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -26,7 +27,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="tableViewFuncionarios" stylesheets="@css/bootstrap3.css">
+            <TableView fx:id="tableViewFuncionarios" stylesheets="@css/bootstrap3.css" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="tableColumnFuncionarioNome" prefWidth="131.0" text="Nome" />
                 <TableColumn fx:id="tableColumnFuncionarioTelefone" prefWidth="113.0" text="Telefone" />
@@ -41,21 +42,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <HBox alignment="TOP_RIGHT" spacing="10.0">
                <children>
-                  <Button fx:id="btnAdicionarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAdicionarFuncionarioClicked" styleClass="success" text="Adicionar" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnAlterarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAlterarFuncionarioClicked" styleClass="primary" text="Alterar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnRemoverFuncionario" mnemonicParsing="false" onMouseClicked="#btnRemoverFuncionarioClicked" styleClass="danger" text="Remover" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnAdicionarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAdicionarFuncionarioClicked" styleClass="success" text="Adicionar" />
+                  <Button fx:id="btnAlterarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAlterarFuncionarioClicked" styleClass="primary" text="Alterar" />
+                  <Button fx:id="btnRemoverFuncionario" mnemonicParsing="false" onMouseClicked="#btnRemoverFuncionarioClicked" styleClass="danger" text="Remover" />
                </children>
-            </GridPane>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
