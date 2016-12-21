@@ -77,7 +77,30 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
         
         return list; 
     }
-
+    
+        public List<Funcionario> listarDentista() {
+        ResultSet query;
+        List<Funcionario> list = new ArrayList<>();
+        String sql = "SELECT * FROM Funcionario where isDentista = true";
+       
+        try{
+            stmt = connect.prepareStatement(sql);
+            query = stmt.executeQuery();
+            
+            while(query.next()){
+                //id, nome, cpf, rg, telefone, salario, dataNascimento, Gerente
+                list.add(new Funcionario(query.getInt("id"), query.getString("nome"), query.getString("cpf"), query.getString("rg"), query.getString("telefone"),
+                query.getDouble("salario"), query.getDate("dataNascimento"), query.getBoolean("isGerente"), query.getBoolean("isDentista")));            
+            }
+            query.close();
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
+        
+        return list; 
+    }
+    
     @Override
     public void delete(Integer id) {
         String sql = "DELETE FROM Funcionario WHERE id = ?";
