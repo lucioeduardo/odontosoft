@@ -1,6 +1,7 @@
 package odontosoft.controller;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -11,8 +12,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import odontosoft.model.dao.FuncionarioDAO;
+import odontosoft.model.dao.UsuarioDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Funcionario;
+import odontosoft.model.domain.Usuario;
 
 public class TelaAdicionarFuncionarioController implements Initializable{
     
@@ -20,7 +23,8 @@ public class TelaAdicionarFuncionarioController implements Initializable{
     private Button btnSalvar,btnCancelar;
     @FXML
     private TextField txtFieldNomeFuncionario,txtFieldTelefoneFuncionario
-            ,txtFieldCpfFuncionario, txtFieldRgFuncionario, txtFieldSalarioFuncionario;
+            ,txtFieldCpfFuncionario, txtFieldRgFuncionario, txtFieldSalarioFuncionario, txtFieldUsuarioFuncionario,
+            txtFieldSenhaFuncionario;
     
     @FXML
     private CheckBox checkBoxGerente, checkBoxDentista;            
@@ -42,10 +46,16 @@ public class TelaAdicionarFuncionarioController implements Initializable{
         boolean gerente = checkBoxGerente.isSelected();
         boolean dentista = checkBoxDentista.isSelected();
         
+        ConexaoBanco conexao = new ConexaoBanco();
+        
         Funcionario f = new Funcionario(0, nome, cpf, rg, telefone, salario, dataNasc, gerente, dentista);
         
-        FuncionarioDAO FuncionarioDao = new FuncionarioDAO(new ConexaoBanco());
+        FuncionarioDAO FuncionarioDao = new FuncionarioDAO(conexao);
         FuncionarioDao.inserir(f);
+        
+        Usuario u = new Usuario(txtFieldUsuarioFuncionario.getText(), txtFieldSenhaFuncionario.getText(), FuncionarioDao.getId());
+        UsuarioDAO usuarioDao = new UsuarioDAO(conexao.getConexao());
+        usuarioDao.inserir(u);
         
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
         stage.close();
