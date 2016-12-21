@@ -125,7 +125,6 @@ public class TelaPrincipalController implements Initializable {
     
     public String getHora(){
         Calendar cal = new GregorianCalendar();
-        String zeroAdicional = "";
         
         int hora = cal.get(Calendar.HOUR_OF_DAY);
         int min = cal.get(Calendar.MINUTE);
