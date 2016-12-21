@@ -4,26 +4,33 @@ import odontosoft.model.domain.Funcionario;
 import java.sql.*;
 import java.util.*;
 import odontosoft.model.database.ConexaoBanco;
-import java.lang.*;
 
 public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>{
-    ConexaoBanco conexao = new ConexaoBanco();
-    Connection connect = conexao.getConexao();
+    ConexaoBanco conexao;
+    Connection connect;
     PreparedStatement stmt = null;
-    Funcionario func;
+
+    public FuncionarioDAO(ConexaoBanco conexao) {
+        this.conexao = conexao;
+        connect = this.conexao.getConexao();
+    }
+   
+    
+    
     
     @Override
     public void inserir(Funcionario var) {
-        String sql = "insert into Funcionario (nome, cpf, telefone, dataNascimento, rg, salario, isGerente) values (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Funcionario (nome, cpf, telefone, dataNascimento, rg, salario, isGerente, isDentista) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try{
             stmt = connect.prepareStatement(sql);
-            stmt.setString(1, func.getNome());
-            stmt.setString(2, func.getCpf());
-            stmt.setString(3, func.getTelefone());
-            stmt.setDate(4, func.getDataNascimento());
-            stmt.setString(5, func.getRg());
-            stmt.setDouble(6, func.getSalario());
-            stmt.setBoolean(7, func.isGerente());
+            stmt.setString(1, var.getNome());
+            stmt.setString(2, var.getCpf());
+            stmt.setString(3, var.getTelefone());
+            stmt.setDate(4, var.getDataNascimento());
+            stmt.setString(5, var.getRg());
+            stmt.setDouble(6, var.getSalario());
+            stmt.setBoolean(7, var.isGerente());
+            stmt.setBoolean(8, var.isDentista());
             
             stmt.execute();
             stmt.close();
@@ -46,7 +53,8 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             
             while(query.next()){
                 //id, nome, cpf, rg, telefone, salario, dataNascimento, Gerente
-                list.add(new Funcionario(query.getInt(1), query.getString(2), query.getString(3), query.getString(4), query.getString(5), query.getDouble(6), query.getDate(7), query.getBoolean(8)));            
+                list.add(new Funcionario(query.getInt("id"), query.getString("nome"), query.getString("cpf"), query.getString("rg"), query.getString("telefone"),
+                query.getDouble("salario"), query.getDate("dataNascimento"), query.getBoolean("isGerente"), query.getBoolean("isDentista")));            
             }
             query.close();
             stmt.close();
@@ -77,7 +85,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
     public void update(Integer id, Funcionario newVar) {
         // nome, cpf, rg, telefone, salario, dataNascimento, isGerente
         String sql = "UPDATE Funcionario SET nome = ?, cpf = ?, "
-                + "rg = ?, telefone = ?, salario = ?, dataNascimento = ?, isGerente = ? where id = ?;";
+                + "rg = ?, telefone = ?, salario = ?, dataNascimento = ?, isGerente = ?, isDentista where id = ?;";
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, newVar.getNome());
@@ -87,8 +95,9 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             stmt.setDouble(5, newVar.getSalario());
             stmt.setDate(6, newVar.getDataNascimento());
             stmt.setBoolean(7, newVar.isGerente());
+            stmt.setBoolean(8, newVar.isDentista());
                         
-            stmt.setInt(8, id);
+            stmt.setInt(9, id);
             
             stmt.execute();
             stmt.close();
@@ -111,7 +120,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
             while(rs.next()){
                 // id, nome, cpf, rg, telefone, salario, dataNascimento, Gerente
                 funcionario = new Funcionario(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"), 
-                        rs.getString("rg"), rs.getString("telefone"), rs.getDouble("salario"), rs.getDate("dataNascimento"), rs.getBoolean("isGerente"));
+                        rs.getString("rg"), rs.getString("telefone"), rs.getDouble("salario"), rs.getDate("dataNascimento"), rs.getBoolean("isGerente"), rs.getBoolean("isDentista"));
             }
             rs.close();
             stmt.close();

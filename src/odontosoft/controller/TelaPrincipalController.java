@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import odontosoft.model.dao.FuncionarioDAO;
+import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Funcionario;
 import odontosoft.model.domain.Usuario;
 
@@ -68,8 +69,8 @@ public class TelaPrincipalController implements Initializable {
     public void setUser(Usuario user) {
         this.user = user;
         
-        
-        Funcionario f = new FuncionarioDAO().buscaPorId(user.getIdFuncionario());
+        ConexaoBanco conexao = new ConexaoBanco();
+        Funcionario f = new FuncionarioDAO(conexao).buscaPorId(user.getIdFuncionario());
         if(f == null) System.out.println("deu null");
         
         lblNome.setText(f.getNome());
