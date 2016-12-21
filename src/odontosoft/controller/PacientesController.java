@@ -105,7 +105,7 @@ public class PacientesController implements Initializable {
         
         try {
             System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
-            FXMLLoader fxmlloader = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
+            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
             Parent parent = fxmlloader.load();
             TelaAlterarPacienteController controller = fxmlloader.getController();
             controller.setPaciente(pacienteSelecionado);
