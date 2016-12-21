@@ -137,8 +137,10 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
     public ObservableList<ConsultaAgenda> getAgendaDoDia(){
         ResultSet rs;
         ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
-        String sql = "select Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,"
-                + "Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario;";
+        String sql = "select Paciente.nome as nomePaciente,Funcionario.nome as "
+                + "nomeFuncionario,Consulta.dataConsulta from Consulta inner join"
+                + " Paciente inner join Funcionario "
+                + "where Date(Consulta.dataConsulta) = Date(now()) order by Consulta.dataConsulta;";
         try{
             stmt = connect.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -165,5 +167,39 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
         System.out.println(list.size());
         return list;
     }
+    
+    public ObservableList<ConsultaAgenda> getAgendaSemana(){
+        ResultSet rs;
+        ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
+        String sql = "select Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,Consulta.dataConsulta "
+                + "from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) "
+                + "between Date(now()) and Date_Add(Date(now()), INTERVAL 1 WEEK) order by Consulta.dataConsulta";
+        try{
+            stmt = connect.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                String nomePaciente = rs.getString("nomePaciente");
+                String nomeDentista = rs.getString("nomeFuncionario");
+                
+                Calendar data = new GregorianCalendar();
+                data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
+                
+                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + data.get(Calendar.MONTH)
+                        + "/" + data.get(Calendar.YEAR);
+                String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
+                
+                list.add(new ConsultaAgenda(nomePaciente, nomeDentista, dataStr, horario));
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
+        
+        System.out.println(list.size());
+        return list;
+    }
+    
     
 }
