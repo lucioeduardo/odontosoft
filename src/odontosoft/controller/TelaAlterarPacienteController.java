@@ -32,15 +32,17 @@ public class TelaAlterarPacienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        txtFieldNomePaciente.setText(paciente.getNome());
-        txtFieldTelefonePaciente.setText(paciente.getTelefone());
-        txtFieldCpfPaciente.setText(paciente.getCpf());
-        datePickerDataNascPaciente.setValue(paciente.getData().toLocalDate());
+        
         
     }
     
     public void setPaciente(Paciente paciente){
         this.paciente = paciente;
+        
+        txtFieldNomePaciente.setText(paciente.getNome());
+        txtFieldTelefonePaciente.setText(paciente.getTelefone());
+        txtFieldCpfPaciente.setText(paciente.getCpf());
+        datePickerDataNascPaciente.setValue(paciente.getData().toLocalDate());
     }
     public Paciente getPaciente(){
         return paciente;
