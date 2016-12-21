@@ -128,10 +128,13 @@ public class TelaPrincipalController implements Initializable {
         String zeroAdicional = "";
         
         int hora = cal.get(Calendar.HOUR_OF_DAY);
-        if (hora < 10) zeroAdicional = "0";
         int min = cal.get(Calendar.MINUTE);
         
-        return zeroAdicional + hora + ":" + min;
+        if (hora < 10) return "0" + hora + ":" + min;
+        if (min < 10) return hora + ":" + "0" + min;
+        if (hora < 10 && min < 10) return "0" + hora + ":" + "0" + min;
+        
+        return hora + ":" + min;
     }
     
 }
