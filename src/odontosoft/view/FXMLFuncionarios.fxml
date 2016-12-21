@@ -51,9 +51,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnAdicionarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAdicionarPacienteClicked" styleClass="success" text="Adicionar" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnAlterarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAlterarPacienteClicked" styleClass="primary" text="Alterar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnRemoverFuncionario" mnemonicParsing="false" onMouseClicked="#btnRemoverPacienteClicked" styleClass="danger" text="Remover" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnAdicionarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAdicionarFuncionarioClicked" styleClass="success" text="Adicionar" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnAlterarFuncionario" mnemonicParsing="false" onMouseClicked="#btnAlterarFuncionarioClicked" styleClass="primary" text="Alterar" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnRemoverFuncionario" mnemonicParsing="false" onMouseClicked="#btnRemoverFuncionarioClicked" styleClass="danger" text="Remover" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
          </children>
