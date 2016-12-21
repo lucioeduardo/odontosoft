@@ -18,13 +18,8 @@ import javafx.stage.Stage;
 import odontosoft.model.dao.PacienteDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Paciente;
-import odontosoft.model.domain.Usuario;
 
-/**
- * FXML Controller class
- *
- * @author eduardo
- */
+
 public class TelaAlterarPacienteController implements Initializable {
 
     private Paciente paciente;    
@@ -46,6 +41,7 @@ public class TelaAlterarPacienteController implements Initializable {
         txtFieldNomePaciente.setText(paciente.getNome());
         txtFieldTelefonePaciente.setText(paciente.getTelefone());
         txtFieldCpfPaciente.setText(paciente.getCpf());
+        datePickerDataNascPaciente.setValue(paciente.getData().toLocalDate());
         
     }
     
@@ -56,7 +52,7 @@ public class TelaAlterarPacienteController implements Initializable {
         return paciente;
     }
     
-    public void btnAlterar(){
+    public void btnSalvarClicked(){
         
         //Atributos da classe cliente
         String nome = txtFieldNomePaciente.getText();
