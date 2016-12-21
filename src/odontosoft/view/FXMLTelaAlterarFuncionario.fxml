@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.TelaAdicionarFuncionarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.TelaAlterarFuncionarioController">
    <top>
       <Label alignment="TOP_LEFT" text="Dados do funcionario" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
@@ -108,11 +108,11 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="71.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <CheckBox fx:id="checkBoxGerente" mnemonicParsing="false" onMouseClicked="#checkBoxGerenteClicked" text="Gerente">
+            <CheckBox fx:id="checkBoxGerente" mnemonicParsing="false" text="Gerente">
                <HBox.margin>
                   <Insets />
                </HBox.margin></CheckBox>
-            <CheckBox fx:id="checkBoxDentista" mnemonicParsing="false" onMouseClicked="#checkBoxDentistaClicked" text="Dentista">
+            <CheckBox fx:id="checkBoxDentista" mnemonicParsing="false" text="Dentista">
                <HBox.margin>
                   <Insets right="250.0" />
                </HBox.margin></CheckBox>
