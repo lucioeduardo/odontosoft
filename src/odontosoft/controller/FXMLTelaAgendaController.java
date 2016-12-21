@@ -5,19 +5,27 @@
  */
 package odontosoft.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import odontosoft.model.dao.ConsultaDAO;
 import odontosoft.model.domain.Consulta;
 import odontosoft.model.domain.ConsultaAgenda;
@@ -71,4 +79,36 @@ public class FXMLTelaAgendaController implements Initializable {
         carregarTableViewAgenda();
     }
     
+    
+    @FXML
+    
+    public void btnRemoverConsultaClicked () {
+           
+    }
+    
+    public void btnAdiarConsultaClicked () {
+        
+    }
+    
+    public void btnAdicioanarConsultaClicked () {
+        Stage modal = new Stage();
+        
+        try {
+            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarConsulta.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarConsulta.fxml"));
+            Scene scene = new Scene(parent);
+            modal.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
+        } catch (IOException ex) {
+            Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        modal.setTitle("Cadastrar Consulta");
+        modal.centerOnScreen();
+        modal.initOwner(tableViewAgenda.getScene().getWindow());
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.showAndWait();
+        
+        carregarTableViewAgenda();
+    }    
 }
