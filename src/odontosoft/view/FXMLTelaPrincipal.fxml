@@ -92,7 +92,7 @@
                   <Label alignment="CENTER" text="Pacientes" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="124.0" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="124.0" onMouseClicked="#btnMenuLateralAgendaClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

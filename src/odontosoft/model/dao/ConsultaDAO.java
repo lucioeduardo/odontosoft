@@ -18,25 +18,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta;
-import odontosoft.model.domain.Funcionario;
-import odontosoft.model.domain.Paciente;
-import odontosoft.model.domain.Procedimento;
+import odontosoft.model.domain.ConsultaAgenda;
+
 
 public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
-    ConexaoBanco conexao;
+    ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
-    Paciente paciente;
-    Funcionario funcionario;
-    ArrayList<Procedimento> procedimentos = new ArrayList<>();
+    
+    public ConsultaDAO() {
 
-    public ConsultaDAO(ConexaoBanco conexao, Paciente paciente, Funcionario funcionario, ArrayList<Procedimento> procedimentos) {
-        this.conexao = conexao;
-        this.paciente = paciente;
-        this.funcionario = funcionario;
-        this.procedimentos = procedimentos;
     }
     
     @Override
@@ -44,8 +40,8 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
         String sql = "INSERT INTO Consulta(idPaciente, idFuncionario, dataConsulta) VALUES (?,?,?);";
         try{
             stmt = connect.prepareStatement(sql);
-            stmt.setInt(1, paciente.getId());
-            stmt.setInt(2, funcionario.getId());
+            stmt.setInt(1, var.getPaciente());
+            stmt.setInt(2, var.getDentista());
             stmt.setTimestamp(3, new Timestamp(var.getData().getTimeInMillis()));
             
             stmt.execute();
@@ -137,5 +133,37 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer>{
         return var;
     }
    
+    
+    public ObservableList<ConsultaAgenda> getAgendaDoDia(){
+        ResultSet rs;
+        ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
+        String sql = "select Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,"
+                + "Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario;";
+        try{
+            stmt = connect.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                String nomePaciente = rs.getString("nomePaciente");
+                String nomeDentista = rs.getString("nomeFuncionario");
+                
+                Calendar data = new GregorianCalendar();
+                data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
+                
+                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + data.get(Calendar.MONTH)
+                        + "/" + data.get(Calendar.YEAR);
+                String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
+                
+                list.add(new ConsultaAgenda(nomePaciente, nomeDentista, dataStr, horario));
+            }
+            rs.close();
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println("Error: " +e);
+        }
+        
+        System.out.println(list.size());
+        return list;
+    }
     
 }
