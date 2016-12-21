@@ -29,10 +29,6 @@ import odontosoft.model.domain.Paciente;
  * @author eduardo
  */
 public class PacientesController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
     
     @FXML
     private TableColumn tableColumnPacienteNome,tableColumnPacienteTelefone,tableColumnPacienteCpf,tableColumnPacienteDataNascimento;

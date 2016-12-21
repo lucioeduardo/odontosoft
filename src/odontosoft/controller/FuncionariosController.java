@@ -19,102 +19,107 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import odontosoft.model.domain.Funcionario;
 import odontosoft.model.dao.FuncionarioDAO;
 import odontosoft.model.database.ConexaoBanco;
-import odontosoft.model.domain.Funcionario;
 
-public class FuncionariosController implements Initializable {
-    
+
+public class FuncionariosController implements Initializable{
     @FXML
-    private TableColumn tableColumnFuncionarioNome,tableColumnFuncionarioTelefone,tableColumnFuncionarioCpf,tableColumnFuncionarioDataNascimento;
+    private TableColumn tableColumnFuncionarioNome,tableColumnFuncionarioTelefone,tableColumnFuncionarioCpf,tableColumnFuncionarioDataNascimento,
+            tableColumnFuncionarioRg, tableColumnFuncionarioSalario, tableColumnFuncionarioGerente, tableColumnFuncionarioDentista;
     @FXML
     private TableView<Funcionario> tableViewFuncionarios;
     @FXML
     private Button btnAdicionarFuncionario,btnAlterarFuncionario,btnRemoverFuncionario;
     
+    private Funcionario funcionarioSelecionado;
     
     private ConexaoBanco conexao = new ConexaoBanco();
-    private FuncionarioDAO funcionarioDAO = new FuncionarioDAO(conexao);
-    private Funcionario funcionarioSelecionado = null;
+    private FuncionarioDAO funcionarioDao = new FuncionarioDAO(conexao);
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         carregarTableViewFuncionarios();
-        
         tableViewFuncionarios.getSelectionModel().selectedItemProperty().addListener(
-        (observable,odlValue,newValue) -> selecionarItemTableViewFuncionarios(newValue));
-    }    
+                (observable,oldValue,newValue) -> selecionarItemTableViewFuncionarios(newValue));
+    }
     
     public void carregarTableViewFuncionarios(){
         tableColumnFuncionarioNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnFuncionarioTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         tableColumnFuncionarioCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        tableColumnFuncionarioDataNascimento.setCellValueFactory(new PropertyValueFactory("data"));
+        tableColumnFuncionarioRg.setCellValueFactory(new PropertyValueFactory<>("rg"));
+        tableColumnFuncionarioDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
+        tableColumnFuncionarioSalario.setCellValueFactory(new PropertyValueFactory<>("salario"));
+        tableColumnFuncionarioGerente.setCellValueFactory(new PropertyValueFactory<>("Gerente"));
+        tableColumnFuncionarioDentista.setCellValueFactory(new PropertyValueFactory<>("Dentista"));
         
-        List<Funcionario> listFuncionarios = funcionarioDAO.listar();
-        ObservableList<Funcionario> observableListFuncionarios = FXCollections.observableArrayList(listFuncionarios);
-        tableViewFuncionarios.setItems(observableListFuncionarios);
+        List<Funcionario> listFuncionarios = funcionarioDao.listar();
+        ObservableList<Funcionario> observableFuncionarios = FXCollections.observableList(listFuncionarios);
+        tableViewFuncionarios.setItems(observableFuncionarios);
+        
     }
     
-    public void selecionarItemTableViewFuncionarios(Funcionario funcionario){
-        this.funcionarioSelecionado=funcionario;
-    }
-    
-    @FXML
-    public void btnRemoverFuncionarioClicked(){
-        if(funcionarioSelecionado!=null){
-            funcionarioDAO.delete(funcionarioSelecionado.getId());
-            carregarTableViewFuncionarios();
-        }
+    public void selecionarItemTableViewFuncionarios(Funcionario newValue){
+        funcionarioSelecionado = newValue;
     }
     
     @FXML
     public void btnAdicionarFuncionarioClicked(){
         Stage modal = new Stage();
-        
-        try {
+        try{
             System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarFuncionario.fxml"));
             Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarFuncionario.fxml"));
             Scene scene = new Scene(parent);
             modal.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
-        } catch (IOException ex) {
+            
+        }catch (IOException ex){
             Logger.getLogger(FuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        modal.setTitle("Cadastrar Funcionario");
+        modal.setTitle("Cadastrar Funcionário");
         modal.centerOnScreen();
         modal.initOwner(btnAdicionarFuncionario.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
         modal.showAndWait();
         
         carregarTableViewFuncionarios();
+        
     }
     @FXML
     public void btnAlterarFuncionarioClicked(){
         Stage modal = new Stage();
-        
-        try {
+        try{
             System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAlterarFuncionario.fxml"));
-            FXMLLoader fxmlloader = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAlterarFuncionario.fxml"));
-            Parent parent = fxmlloader.load();
-            //TelaAlterarFuncionarioController controller = fxmlloader.getController();
-            //controller.setFuncionario(funcionarioSelecionado);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaAlterarFuncionario.fxml"));
+            Parent parent = fxmlLoader.load();
+            TelaAlterarFuncionarioController controller = fxmlLoader.getController();
+            controller.setFuncionario(funcionarioSelecionado);
             
             Scene scene = new Scene(parent);
             modal.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
-        } catch (IOException ex) {
+            
+        }catch (IOException ex){
             Logger.getLogger(FuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        modal.setTitle("Alterar Funcionario");
+        
+        modal.setTitle("Alterar Funcionário");
         modal.centerOnScreen();
         modal.initOwner(btnAlterarFuncionario.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
         modal.showAndWait();
         
         carregarTableViewFuncionarios();
+    }
+    @FXML
+    public void btnRemoverFuncionarioClicked(){
+        if (funcionarioSelecionado!=null) {
+            funcionarioDao.delete(funcionarioSelecionado.getId());
+            carregarTableViewFuncionarios();
+        }
     }
     
 }

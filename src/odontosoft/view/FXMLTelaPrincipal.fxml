@@ -79,7 +79,7 @@
                   <Label alignment="CENTER" text="Pagina Inicial" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" onMouseClicked="#btnMenuLateralPacientesClick" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#btnMenuLateralPacientesClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -105,7 +105,7 @@
                   <Label alignment="CENTER" text="Agenda" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="161.0" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="161.0" onMouseClicked="#btnMenuLateralFuncionariosClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
