@@ -77,7 +77,7 @@ public class FXMLTelaProcedimentosController implements Initializable {
             Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        modal.setTitle("Cadastrar Paciente");
+        modal.setTitle("Cadastrar Procedimento");
         modal.centerOnScreen();
         modal.initOwner(tableViewProcedimentos.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
@@ -109,7 +109,7 @@ public class FXMLTelaProcedimentosController implements Initializable {
             Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        modal.setTitle("Alterar Paciente");
+        modal.setTitle("Alterar Procedimento");
         modal.centerOnScreen();
         modal.initOwner(tableViewProcedimentos.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
