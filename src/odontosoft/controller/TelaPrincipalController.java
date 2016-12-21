@@ -94,7 +94,7 @@ public class TelaPrincipalController implements Initializable {
     }
     
     @FXML
-    public void btnMenuLateralPacientesClick(){
+    public void btnMenuLateralPacientesClicked(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLPacientes.fxml"));
             borderPane.setCenter(fxmlLoader.load());
@@ -113,14 +113,23 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
+    @FXML
+    public void btnMenuLateralFuncionariosClicked(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLFuncionarios.fxml"));
+            borderPane.setCenter(fxmlLoader.load());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public String getHora(){
         Calendar cal = new GregorianCalendar();
         
         int hora = cal.get(Calendar.HOUR_OF_DAY);
         int min = cal.get(Calendar.MINUTE);
-        int sec = cal.get(Calendar.SECOND);
         
-        return hora + ":" + min + ":" + sec;
+        return hora + ":" + min;
     }
     
 }
