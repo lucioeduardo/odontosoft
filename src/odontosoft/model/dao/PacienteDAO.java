@@ -88,7 +88,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
 
     @Override
     public void update(Integer id, Paciente newVar) {
-        String sql = "UPDATE Usuario SET nome = ?, dataNascimento = ?, "
+        String sql = "UPDATE Paciente SET nome = ?, dataNascimento = ?, "
                 + "cpf = ?, telefone = ? WHERE id = ?;";
         try{
             stmt = connect.prepareStatement(sql);
@@ -96,7 +96,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             stmt.setDate(2, newVar.getData());
             stmt.setString(3, newVar.getCpf());
             stmt.setString(4, newVar.getTelefone());
-            stmt.setInt(6, id);
+            stmt.setInt(5, id);
             
             stmt.execute();
             stmt.close();
