@@ -85,7 +85,7 @@ public class FuncionarioDAO implements InterfaceGenericDAO<Funcionario, Integer>
     public void update(Integer id, Funcionario newVar) {
         // nome, cpf, rg, telefone, salario, dataNascimento, isGerente
         String sql = "UPDATE Funcionario SET nome = ?, cpf = ?, "
-                + "rg = ?, telefone = ?, salario = ?, dataNascimento = ?, isGerente = ?, isDentista where id = ?;";
+                + "rg = ?, telefone = ?, salario = ?, dataNascimento = ?, isGerente = ?, isDentista = ? where id = ?;";
         try{
             stmt = connect.prepareStatement(sql);
             stmt.setString(1, newVar.getNome());
