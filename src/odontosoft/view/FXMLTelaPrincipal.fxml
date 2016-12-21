@@ -131,6 +131,19 @@
                   <Label alignment="CENTER" text="Finanças" />
                </children>
             </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="226.0" onMouseClicked="#btnMenuLateralProcedimentosClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iconProcedimentos.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" text="Procedimentos" />
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets />
