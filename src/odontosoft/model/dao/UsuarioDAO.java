@@ -108,5 +108,22 @@ public class UsuarioDAO implements InterfaceGenericDAO<Usuario,String> {
         return user;
     }
     
+    public Usuario buscaPorIdInt(int id){
+        String sql = "SELECT * FROM Usuario WHERE idFuncionario = ?";
+        Usuario user = null;
+        
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next())
+                user = new Usuario(rs.getString("id"), rs.getString("senha"),rs.getInt("idFuncionario"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+    
     
 }
