@@ -11,39 +11,33 @@ package odontosoft.model.domain;
  * Classe utilizada para popular a TableViewAgenda
  */
 public class ConsultaAgenda {
-    private String nomePaciente,nomeDentista,data,horario;
+    private Paciente paciente;
+    private Funcionario dentista;
+    private String data,horario;
     int idConsulta;
 
-    public int getIdConsulta() {
-        return idConsulta;
-    }
-
-    public void setIdConsulta(int idConsulta) {
-        this.idConsulta = idConsulta;
-    }
-
-    public ConsultaAgenda(int idConsulta, String nomePaciente, String nomeDentista, String data, String horario) {
-        this.nomePaciente = nomePaciente;
-        this.nomeDentista = nomeDentista;
+    public ConsultaAgenda(Paciente paciente, Funcionario dentista, String data, String horario, int idConsulta) {
+        this.paciente = paciente;
+        this.dentista = dentista;
         this.data = data;
         this.horario = horario;
         this.idConsulta = idConsulta;
     }
 
-    public String getNomePaciente() {
-        return nomePaciente;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void setNomePaciente(String nomePaciente) {
-        this.nomePaciente = nomePaciente;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
-    public String getNomeDentista() {
-        return nomeDentista;
+    public Funcionario getDentista() {
+        return dentista;
     }
 
-    public void setNomeDentista(String nomeDentista) {
-        this.nomeDentista = nomeDentista;
+    public void setDentista(Funcionario dentista) {
+        this.dentista = dentista;
     }
 
     public String getData() {
@@ -61,6 +55,16 @@ public class ConsultaAgenda {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
+    public int getIdConsulta() {
+        return idConsulta;
+    }
+
+    public void setIdConsulta(int idConsulta) {
+        this.idConsulta = idConsulta;
+    }
+
+   
     
     
 }
