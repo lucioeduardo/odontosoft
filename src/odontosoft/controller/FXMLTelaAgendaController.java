@@ -66,13 +66,13 @@ public class FXMLTelaAgendaController implements Initializable {
     }
     
     public void carregarTableViewAgenda(){
-        tableColumnAgendaPaciente.setCellValueFactory(new PropertyValueFactory<>("nomePaciente"));
-        tableColumnAgendaDentista.setCellValueFactory(new PropertyValueFactory<>("nomeDentista"));
+        tableColumnAgendaPaciente.setCellValueFactory(new PropertyValueFactory<>("paciente"));
+        tableColumnAgendaDentista.setCellValueFactory(new PropertyValueFactory<>("dentista"));
         tableColumnAgendaHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
         tableColumnAgendaData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
         if(radioBtnAgendaDia.isSelected())tableViewAgenda.setItems(consultaDao.getAgendaDoDia());
-        else tableViewAgenda.setItems(consultaDao.getAgendaSemana());
+        //else tableViewAgenda.setItems(consultaDao.getAgendaSemana());
     }
     
     @FXML
@@ -102,6 +102,7 @@ public class FXMLTelaAgendaController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaAdiarConsulta.fxml"));
             Parent parent = fxmlLoader.load();
             TelaAdiarConsultaController controller = fxmlLoader.getController();
+            controller.setConculta(consultaSelecionada);
             
             Scene scene = new Scene(parent);
             modal.setScene(scene);
@@ -110,7 +111,7 @@ public class FXMLTelaAgendaController implements Initializable {
             Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        modal.setTitle("Cadastrar Consulta");
+        modal.setTitle("Adiar Consulta");
         modal.centerOnScreen();
         modal.initOwner(tableViewAgenda.getScene().getWindow());
         modal.initModality(Modality.APPLICATION_MODAL);
