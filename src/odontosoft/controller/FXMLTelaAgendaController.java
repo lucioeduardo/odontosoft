@@ -46,6 +46,8 @@ public class FXMLTelaAgendaController implements Initializable {
     @FXML
     private RadioButton radioBtnAgendaSemana,radioBtnAgendaDia;
     
+    private ConsultaAgenda consultaSelecionada;
+    
     
     ConsultaDAO consultaDao = new ConsultaDAO();
     
@@ -54,7 +56,14 @@ public class FXMLTelaAgendaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         radioBtnAgendaDia.setSelected(true);
         carregarTableViewAgenda();
+        
+        tableViewAgenda.getSelectionModel().selectedItemProperty().addListener(
+        (observable,odlValue,newValue) -> selecionarItemTableViewAgenda(newValue));
     }    
+    
+    public void selecionarItemTableViewAgenda(ConsultaAgenda consulta){
+        this.consultaSelecionada = consulta;
+    }
     
     public void carregarTableViewAgenda(){
         tableColumnAgendaPaciente.setCellValueFactory(new PropertyValueFactory<>("nomePaciente"));
@@ -87,7 +96,27 @@ public class FXMLTelaAgendaController implements Initializable {
     }
     
     public void btnAdiarConsultaClicked () {
+        Stage modal = new Stage();
         
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaAdiarConsulta.fxml"));
+            Parent parent = fxmlLoader.load();
+            TelaAdiarConsultaController controller = fxmlLoader.getController();
+            
+            Scene scene = new Scene(parent);
+            modal.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
+        } catch (IOException ex) {
+            Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        modal.setTitle("Cadastrar Consulta");
+        modal.centerOnScreen();
+        modal.initOwner(tableViewAgenda.getScene().getWindow());
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.showAndWait();
+        
+        carregarTableViewAgenda();
     }
     
     public void btnAdicioanarConsultaClicked () {
