@@ -12,12 +12,14 @@ package odontosoft.model.domain;
  */
 public class ConsultaAgenda {
     private String nomePaciente,nomeDentista,data,horario;
+    int idConsulta;
 
-    public ConsultaAgenda(String nomePaciente, String nomeDentista, String data, String horario) {
+    public ConsultaAgenda(int idConsulta, String nomePaciente, String nomeDentista, String data, String horario) {
         this.nomePaciente = nomePaciente;
         this.nomeDentista = nomeDentista;
         this.data = data;
         this.horario = horario;
+        this.idConsulta = idConsulta;
     }
 
     public String getNomePaciente() {
