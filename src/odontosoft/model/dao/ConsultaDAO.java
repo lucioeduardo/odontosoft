@@ -39,8 +39,8 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
         String sql = "INSERT INTO Consulta(idPaciente, idFuncionario, dataConsulta) VALUES (?,?,?);";
         try {
             stmt = connect.prepareStatement(sql);
-            stmt.setInt(1, var.getPaciente());
-            stmt.setInt(2, var.getDentista());
+            stmt.setInt(1, var.getIdPaciente());
+            stmt.setInt(2, var.getIdDentista());
 
             System.out.println("Ano:" + var.getData().get(Calendar.YEAR));
             stmt.setTimestamp(3, new Timestamp(var.getData().getTimeInMillis()));
@@ -97,8 +97,8 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
         String sql = "UPDATE Consulta SET idPaciente = ?, idFuncionario = ? WHERE id = ?;";
         try {
             stmt = connect.prepareStatement(sql);
-            stmt.setInt(1, newVar.getPaciente());
-            stmt.setInt(2, newVar.getDentista());
+            stmt.setInt(1, newVar.getIdPaciente());
+            stmt.setInt(2, newVar.getIdDentista());
             stmt.setInt(3, id);
 
             stmt.execute();
