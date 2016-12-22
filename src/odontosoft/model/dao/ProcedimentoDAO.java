@@ -22,10 +22,6 @@ public class ProcedimentoDAO implements InterfaceGenericDAO<Procedimento, Intege
     ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
-
-    public ProcedimentoDAO() {
-        
-    }
     
     @Override
     public void inserir(Procedimento var) {
