@@ -14,6 +14,14 @@ public class ConsultaAgenda {
     private String nomePaciente,nomeDentista,data,horario;
     int idConsulta;
 
+    public int getIdConsulta() {
+        return idConsulta;
+    }
+
+    public void setIdConsulta(int idConsulta) {
+        this.idConsulta = idConsulta;
+    }
+
     public ConsultaAgenda(int idConsulta, String nomePaciente, String nomeDentista, String data, String horario) {
         this.nomePaciente = nomePaciente;
         this.nomeDentista = nomeDentista;
