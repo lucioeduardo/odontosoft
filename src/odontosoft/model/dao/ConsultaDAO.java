@@ -137,7 +137,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
     public ObservableList<ConsultaAgenda> getAgendaDoDia() {
         ResultSet rs;
         ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
-        String sql = "select Consulta.id as idConsulta Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) = Date(now()) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id;";
+        String sql = "select Consulta.id as idConsulta, Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) = Date(now()) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id;";
         try {
             stmt = connect.prepareStatement(sql);
             rs = stmt.executeQuery();
