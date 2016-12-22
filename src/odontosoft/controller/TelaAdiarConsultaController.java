@@ -35,7 +35,9 @@ public class TelaAdiarConsultaController implements Initializable {
     private TextField txtFieldHorarioConsulta;
     
     @FXML
-    private ComboBox cmbBoxDentista, cmbBoxPaciente;
+    private ComboBox<Funcionario> cmbBoxDentista;
+    @FXML
+    private ComboBox<Paciente> cmbBoxPaciente;
     
     private final PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
     private final FuncionarioDAO funcionarioDao = new FuncionarioDAO(new ConexaoBanco());
@@ -50,6 +52,9 @@ public class TelaAdiarConsultaController implements Initializable {
     @Override
     
     public void initialize(URL url, ResourceBundle rb) {
+ 
+        
+        
         completeComboBox();
     }   
     
@@ -58,17 +63,26 @@ public class TelaAdiarConsultaController implements Initializable {
         cmbBoxPaciente.setItems(listaPaciente);   
                 
         ObservableList <Funcionario> listaDentista = FXCollections.observableArrayList(listaf);        
-        cmbBoxDentista.setItems(listaDentista);           
+        cmbBoxDentista.setItems(listaDentista);   
+        
+       
+        
+        //cmbBoxPaciente.getSelectionModel().select(i);
     }
     
     public void setConculta(ConsultaAgenda consulta){
         this.consulta = consulta;
+        
+        int i = lista.indexOf(consulta.getPaciente());
+        cmbBoxPaciente.setValue(consulta.getPaciente());
+        cmbBoxDentista.setValue(consulta.getDentista());
+      
     }
     
     public void btnSalvarClicked(){
         //Atributos da classe consulta                
-        Paciente pac = lista.get(cmbBoxPaciente.getSelectionModel().getSelectedIndex());
-        Funcionario dent = listaf.get(cmbBoxDentista.getSelectionModel().getSelectedIndex());
+        Paciente pac = cmbBoxPaciente.getSelectionModel().getSelectedItem();
+        Funcionario dent = cmbBoxDentista.getSelectionModel().getSelectedItem();
                         
         String[] hora = txtFieldHorarioConsulta.getText().split(":");
         LocalDate d = datePickerDataConsulta.getValue();
@@ -76,8 +90,10 @@ public class TelaAdiarConsultaController implements Initializable {
         System.out.println(d.getYear() + "/" + d.getMonthValue() + "/" + d.getDayOfMonth());
         Calendar c = new GregorianCalendar(d.getYear(), d.getMonthValue()-1, d.getDayOfMonth(),Integer.parseInt(hora[0]), Integer.parseInt(hora[1]));
         System.out.println(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR));
+        
         //c = new GregorianCalendar
-        Consulta consul = new Consulta (this.consulta.getIdConsulta(),pac.getId(), dent.getId(), c);        
+        Consulta consul = new Consulta (this.consulta.getIdConsulta(),pac.getId(), dent.getId(), c); 
+        consultaDao.update(this.consulta.getIdConsulta(), consul);
         
                        
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
