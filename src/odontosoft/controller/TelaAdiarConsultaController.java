@@ -22,6 +22,7 @@ import odontosoft.model.dao.FuncionarioDAO;
 import odontosoft.model.dao.PacienteDAO;
 import odontosoft.model.database.ConexaoBanco;
 import odontosoft.model.domain.Consulta;
+import odontosoft.model.domain.ConsultaAgenda;
 import odontosoft.model.domain.Funcionario;
 import odontosoft.model.domain.Paciente;
 
@@ -35,12 +36,14 @@ public class TelaAdiarConsultaController implements Initializable {
     
     @FXML
     private ComboBox cmbBoxDentista, cmbBoxPaciente;
-    private final PacienteDAO pa = new PacienteDAO(new ConexaoBanco());
-    private final FuncionarioDAO fa = new FuncionarioDAO(new ConexaoBanco());
-    private final ConsultaDAO cons = new ConsultaDAO();
-    List <Paciente> lista = pa.listar();
-    List <Funcionario> listaf = fa.listarDentista();
-           
+    
+    private final PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
+    private final FuncionarioDAO funcionarioDao = new FuncionarioDAO(new ConexaoBanco());
+    private final ConsultaDAO consultaDao = new ConsultaDAO();
+    List <Paciente> lista = pacienteDao.listar();
+    List <Funcionario> listaf = funcionarioDao.listarDentista();
+    private ConsultaAgenda consulta;
+    
     @FXML
     private DatePicker datePickerDataConsulta;
     
@@ -58,6 +61,10 @@ public class TelaAdiarConsultaController implements Initializable {
         cmbBoxDentista.setItems(listaDentista);           
     }
     
+    public void setConculta(ConsultaAgenda consulta){
+        this.consulta = consulta;
+    }
+    
     public void btnSalvarClicked(){
         //Atributos da classe consulta                
         Paciente pac = lista.get(cmbBoxPaciente.getSelectionModel().getSelectedIndex());
@@ -70,7 +77,7 @@ public class TelaAdiarConsultaController implements Initializable {
         Calendar c = new GregorianCalendar(d.getYear(), d.getMonthValue()-1, d.getDayOfMonth(),Integer.parseInt(hora[0]), Integer.parseInt(hora[1]));
         System.out.println(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR));
         //c = new GregorianCalendar
-        Consulta consul = new Consulta (pac.getId(), dent.getId(), c);        
+        Consulta consul = new Consulta (this.consulta.getIdConsulta(),pac.getId(), dent.getId(), c);        
         
                        
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
