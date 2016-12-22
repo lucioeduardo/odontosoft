@@ -16,6 +16,30 @@ public class Consulta {
     private int id,idPaciente;
     private int idDentista;
     private Calendar data;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public int getIdDentista() {
+        return idDentista;
+    }
+
+    public void setIdDentista(int idDentista) {
+        this.idDentista = idDentista;
+    }
     
     
     
@@ -25,23 +49,6 @@ public class Consulta {
         this.idPaciente = paciente;
         this.data = data;
         this.id = id;
-    }
-
-
-    public int getDentista() {
-        return idDentista;
-    }
-
-    public void setDentista(int dentista) {
-        this.idDentista = dentista;
-    }
-
-    public int getPaciente() {
-        return idPaciente;
-    }
-
-    public void setPaciente(int paciente) {
-        this.idPaciente = paciente;
     }
 
     public Calendar getData() {
