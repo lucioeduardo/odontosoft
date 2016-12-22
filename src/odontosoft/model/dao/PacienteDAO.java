@@ -117,7 +117,7 @@ public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
-                var = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getDate("data"), 
+                var = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getDate("dataNascimento"), 
                         rs.getString("cpf"), rs.getString("telefone"));
             }
             rs.close();
