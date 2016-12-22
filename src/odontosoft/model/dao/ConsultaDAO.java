@@ -10,7 +10,6 @@ package odontosoft.model.dao;
  * @author Aluno
  */
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import odontosoft.model.database.ConexaoBanco;
@@ -68,7 +66,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
 
-                list.add(new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data));
+                list.add(new Consulta(rs.getInt("id"),rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data));
 
             }
             rs.close();
@@ -125,7 +123,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
 
-                var = new Consulta(rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data);
+                var = new Consulta(rs.getInt("id"),rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data);
             }
             rs.close();
             stmt.close();
@@ -139,7 +137,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
     public ObservableList<ConsultaAgenda> getAgendaDoDia() {
         ResultSet rs;
         ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
-        String sql = "select Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) = Date(now()) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id;";
+        String sql = "select Consulta.id as idConsulta Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) = Date(now()) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id;";
         try {
             stmt = connect.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -147,7 +145,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
             while (rs.next()) {
                 String nomePaciente = rs.getString("nomePaciente");
                 String nomeDentista = rs.getString("nomeFuncionario");
-
+                int idConsulta = rs.getInt("idConsulta");
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
 
@@ -155,7 +153,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                         + "/" + data.get(Calendar.YEAR);
                 String horario = data.get(Calendar.HOUR_OF_DAY) + ":" + data.get(Calendar.MINUTE);
 
-                list.add(new ConsultaAgenda(nomePaciente, nomeDentista, dataStr, horario));
+                list.add(new ConsultaAgenda(idConsulta,nomePaciente, nomeDentista, dataStr, horario));
             }
             rs.close();
             stmt.close();
@@ -180,6 +178,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
             while (rs.next()) {
                 String nomePaciente = rs.getString("nomePaciente");
                 String nomeDentista = rs.getString("nomeFuncionario");
+                int idConsulta = rs.getInt("idConsulta");
 
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
@@ -188,7 +187,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                         + "/" + data.get(Calendar.YEAR);
                 String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
 
-                list.add(new ConsultaAgenda(nomePaciente, nomeDentista, dataStr, horario));
+                list.add(new ConsultaAgenda(idConsulta,nomePaciente, nomeDentista, dataStr, horario));
             }
             rs.close();
             stmt.close();

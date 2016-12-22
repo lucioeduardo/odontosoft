@@ -13,34 +13,35 @@ import java.util.Calendar;
  * @author Aluno
  */
 public class Consulta {
-    private int paciente;
-    private int dentista;
+    private int id,idPaciente;
+    private int idDentista;
     private Calendar data;
     
     
     
 
-    public Consulta(int paciente, int dentista, Calendar data) {
-        this.dentista = dentista;
-        this.paciente = paciente;
+    public Consulta(int id, int paciente, int dentista, Calendar data) {
+        this.idDentista = dentista;
+        this.idPaciente = paciente;
         this.data = data;
+        this.id = id;
     }
 
 
     public int getDentista() {
-        return dentista;
+        return idDentista;
     }
 
     public void setDentista(int dentista) {
-        this.dentista = dentista;
+        this.idDentista = dentista;
     }
 
     public int getPaciente() {
-        return paciente;
+        return idPaciente;
     }
 
     public void setPaciente(int paciente) {
-        this.paciente = paciente;
+        this.idPaciente = paciente;
     }
 
     public Calendar getData() {
