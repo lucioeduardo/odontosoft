@@ -22,6 +22,8 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
     ConexaoBanco conexao = new ConexaoBanco();
     Connection connect = conexao.getConexao();
     PreparedStatement stmt = null;
+    PacienteDAO pacienteDao = new PacienteDAO(conexao);
+    FuncionarioDAO funcionarioDao = new FuncionarioDAO(conexao);
 
     public ConsultaDAO() {
 
@@ -131,7 +133,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
     public ObservableList<ConsultaAgenda> getAgendaDoDia() {
         ResultSet rs;
         ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
-        String sql = "select Consulta.id as idConsulta, Paciente.id as idPaciente,Funcionario.id as idFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) = Date(now()) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id;";
+        String sql = "select Consulta.id as idConsulta, Paciente.id as idPaciente,Funcionario.id as idFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) = Date(now()) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id order by Consulta.dataConsulta;";
         try {
             stmt = connect.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -147,8 +149,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                         + "/" + data.get(Calendar.YEAR);
                 String horario = data.get(Calendar.HOUR_OF_DAY) + ":" + data.get(Calendar.MINUTE);
 
-                PacienteDAO pacienteDao = new PacienteDAO(conexao);
-                FuncionarioDAO funcionarioDao = new FuncionarioDAO(conexao);
+                
                 
                 list.add(new ConsultaAgenda(pacienteDao.buscaPorId(idPaciente), funcionarioDao.buscaPorId(idDentista), dataStr, horario,idConsulta));
             }
@@ -161,20 +162,18 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
         System.out.println(list.size());
         return list;
     }
-/*
+
     public ObservableList<ConsultaAgenda> getAgendaSemana() {
         ResultSet rs;
         ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
-        String sql = "select Paciente.nome as nomePaciente,Funcionario.nome as nomeFuncionario,Consulta.dataConsulta "
-                + "from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) "
-                + "between Date(now()) and Date_Add(Date(now()), INTERVAL 1 WEEK) order by Consulta.dataConsulta";
+        String sql = "select Consulta.id as idConsulta, Paciente.id as idPaciente,Funcionario.id as idFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) between Date(now()) and Date_Add(Date(now()), INTERVAL 1 WEEK) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id order by Consulta.dataConsulta;";
         try {
             stmt = connect.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String nomePaciente = rs.getString("nomePaciente");
-                String nomeDentista = rs.getString("nomeFuncionario");
+                int idPaciente = rs.getInt("idPaciente");
+                int idDentista = rs.getInt("idFuncionario");
                 int idConsulta = rs.getInt("idConsulta");
 
                 Calendar data = new GregorianCalendar();
@@ -184,7 +183,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                         + "/" + data.get(Calendar.YEAR);
                 String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
 
-                list.add(new ConsultaAgenda(idConsulta,nomePaciente, nomeDentista, dataStr, horario));
+                list.add(new ConsultaAgenda(pacienteDao.buscaPorId(idPaciente), funcionarioDao.buscaPorId(idDentista), dataStr, horario,idConsulta));
             }
             rs.close();
             stmt.close();
@@ -195,5 +194,5 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
         System.out.println(list.size());
         return list;
     }
-*/
+
 }
