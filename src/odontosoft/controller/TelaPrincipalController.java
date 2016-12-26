@@ -51,7 +51,7 @@ public class TelaPrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        btnMenuLateralPaginaInicialClicked();
         
         Timer timer = new Timer();
         
@@ -100,6 +100,16 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     public void imgViewSairMouseClicked(){
         System.exit(0);
+    }
+    
+    @FXML
+    public void btnMenuLateralPaginaInicialClicked(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLPaginaInicial.fxml"));
+            borderPane.setCenter(fxmlLoader.load());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML
