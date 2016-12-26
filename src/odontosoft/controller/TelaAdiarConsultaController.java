@@ -3,6 +3,8 @@ package odontosoft.controller;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -76,7 +78,12 @@ public class TelaAdiarConsultaController implements Initializable {
         int i = lista.indexOf(consulta.getPaciente());
         cmbBoxPaciente.setValue(consulta.getPaciente());
         cmbBoxDentista.setValue(consulta.getDentista());
-      
+        txtFieldHorarioConsulta.setText(consulta.getHorario());
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(consulta.getData(),formatter);
+        datePickerDataConsulta.setValue(data);
+        
     }
     
     public void btnSalvarClicked(){
