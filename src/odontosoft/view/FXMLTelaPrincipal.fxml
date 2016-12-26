@@ -30,7 +30,7 @@
                         <Image url="@img/logo3232.png" />
                      </image>
                      <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
                      </HBox.margin>
                   </ImageView>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="136.0" text="OdontoSoft" textFill="WHITE">
@@ -66,7 +66,7 @@
    <left>
       <VBox prefHeight="358.0" prefWidth="193.0" spacing="10.0" styleClass="menuLateral" stylesheets="@css/TelaPrincipal.css" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="20.0" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="20.0" onMouseClicked="#btnMenuLateralPaginaInicialClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -109,13 +109,13 @@
                <children>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/iconFinancas.png" />
+                        <Image url="@img/iconEstatisticas.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label alignment="CENTER" text="Finanças" />
+                  <Label alignment="CENTER" text="Estatísticas" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="226.0" onMouseClicked="#btnMenuLateralProcedimentosClicked" prefHeight="0.0" prefWidth="129.0" styleClass="btnMenuLateral">
@@ -141,7 +141,7 @@
                         <Insets bottom="5.0" left="8.0" right="9.0" top="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label alignment="CENTER" text="Funcionarios" />
+                  <Label alignment="CENTER" text="Funcionários" />
                </children>
             </HBox>
          </children>
