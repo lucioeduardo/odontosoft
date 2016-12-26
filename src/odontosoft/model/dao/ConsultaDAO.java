@@ -194,5 +194,28 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
         System.out.println(list.size());
         return list;
     }
+    
+    public Consulta getProximaConsulta(){
+        String sql = "SELECT * FROM Consulta WHERE dataConsulta >= now() and Date(dataConsulta)=Date(now()) ORDER BY dataConsulta LIMIT 1;";
+        Consulta consulta = null;
+
+        try {
+            stmt = connect.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Calendar data = new GregorianCalendar();
+                data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
+
+                consulta = new Consulta(rs.getInt("id"),rs.getInt("idPaciente"), rs.getInt("idFuncionario"), data);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+
+        return consulta;
+    }
 
 }
