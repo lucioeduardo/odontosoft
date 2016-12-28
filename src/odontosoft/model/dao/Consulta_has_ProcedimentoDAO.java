@@ -71,9 +71,12 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
     public void delete(String idString) {
         String sql = "DELETE FROM Consulta_has_Procedimento WHERE idConsulta = ? AND idProcedimento = ?";
         String id[] = new String[2];
-        id = idString.split("|");
+        id = idString.split(" ");
         try {
             stmt = connect.prepareStatement(sql);
+            
+            System.out.println("STRS:" + id[0] + " " + id[1]);
+            
             stmt.setInt(1, Integer.parseInt(id[0]));
             stmt.setInt(2, Integer.parseInt(id[1]));
             
@@ -90,7 +93,7 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
         String sql = "UPDATE Consulta_has_Procedimento SET idConsulta = ?, idProcedimento = ? WHERE idConsulta = ? "
                 + "AND idProceidmento = ?;";
         String id[] = new String[2];
-        id = idString.split("|");
+        id = idString.split(" ");
         try {
             stmt = connect.prepareStatement(sql);
             stmt.setInt(1, newVar.getIdConsulta());
@@ -111,7 +114,7 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
         String sql = "SELECT * FROM Procedimento WHERE idConsulta = ? AND idProcedimento = ?";
         Consulta_has_Procedimento var = null;
         String id[] = new String[2];
-        id = idString.split("|");
+        id = idString.split(" ");
         
         try {
             stmt = connect.prepareStatement(sql);
