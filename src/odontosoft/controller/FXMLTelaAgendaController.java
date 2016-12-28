@@ -136,5 +136,29 @@ public class FXMLTelaAgendaController implements Initializable {
         modal.showAndWait();
         
         carregarTableViewAgenda();
-    }    
+    }
+
+    @FXML
+    public void btnProcedimentosClicked(){
+        Stage modal = new Stage();
+        
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaConsultaProcedimentos.fxml"));
+            Parent parent = fxmlLoader.load();
+            FXMLTelaConsultaProcedimentosController controller = fxmlLoader.getController();
+            controller.setConsulta(consultaSelecionada);
+            
+            Scene scene = new Scene(parent);
+            modal.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/odontosoft/view/css/bootstrap3.css").toExternalForm());
+        } catch (IOException ex) {
+            Logger.getLogger(PacientesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        modal.setTitle("Procedimentos da consulta");
+        modal.centerOnScreen();
+        modal.initOwner(tableViewAgenda.getScene().getWindow());
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.showAndWait();        
+    }
 }
