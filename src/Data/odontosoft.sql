@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS Consulta(
 CREATE TABLE IF NOT EXISTS Consulta_has_Procedimento(
     idConsulta int not null,
     idProcedimento int not null,
+    quantidade int not null,
     FOREIGN KEY (idConsulta)
 	REFERENCES Consulta(id),
     FOREIGN KEY (idProcedimento)
