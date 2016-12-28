@@ -33,14 +33,15 @@ public class TelaAdicionarConsultaController implements Initializable {
     
     @FXML
     private ComboBox cmbBoxDentista, cmbBoxPaciente;
-    private final PacienteDAO pa = new PacienteDAO(new ConexaoBanco());
-    private final FuncionarioDAO fa = new FuncionarioDAO(new ConexaoBanco());
-    private final ConsultaDAO cons = new ConsultaDAO();
-    List <Paciente> listaPacientes = pa.listar();
-    List <Funcionario> listaFuncionarios = fa.listarDentista();
+    private final PacienteDAO pacienteDao = new PacienteDAO(new ConexaoBanco());
+    private final FuncionarioDAO funcionarioDao = new FuncionarioDAO(new ConexaoBanco());
+    private final ConsultaDAO consultaDao = new ConsultaDAO();
+    List <Paciente> listaPacientes = pacienteDao.listar();
+    List <Funcionario> listaFuncionarios = funcionarioDao.listarDentista();
            
     @FXML
     private DatePicker datePickerDataConsulta;
+    
     
     @Override
     
@@ -69,7 +70,7 @@ public class TelaAdicionarConsultaController implements Initializable {
         System.out.println(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR));
         //c = new GregorianCalendar
         Consulta consul = new Consulta (0,paciente.getId(), dentista.getId(), c);        
-        cons.inserir(consul);
+        consultaDao.inserir(consul);
                        
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
         stage.close();
