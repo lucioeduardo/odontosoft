@@ -18,14 +18,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import odontosoft.model.dao.Consulta_has_ProcedimentoDAO;
 import odontosoft.model.dao.ProcedimentoDAO;
-import odontosoft.model.domain.Consulta;
 import odontosoft.model.domain.ConsultaAgenda;
 import odontosoft.model.domain.ConsultaProcedimento;
 import odontosoft.model.domain.Consulta_has_Procedimento;
-import odontosoft.model.domain.Funcionario;
-import odontosoft.model.domain.Paciente;
 import odontosoft.model.domain.Procedimento;
 
 /**
@@ -54,12 +52,19 @@ public class FXMLTelaConsultaProcedimentosController implements Initializable {
     private final ProcedimentoDAO procedimentoDao = new ProcedimentoDAO();
     private final Consulta_has_ProcedimentoDAO consultaProcDao = new Consulta_has_ProcedimentoDAO();
     private ConsultaAgenda consulta;
-    
+    private ConsultaProcedimento consProcSelecionado;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         completeComboBox();
         
+        tableViewProcedimentos.getSelectionModel().selectedItemProperty().addListener(
+        (observable,odlValue,newValue) -> selecionarItemTableViewProcedimentos(newValue));
+        
+    }
+    
+    public void selecionarItemTableViewProcedimentos(ConsultaProcedimento procedimento){
+        this.consProcSelecionado = procedimento;
     }
 
     public void btnAdicionarClicked(){
@@ -103,5 +108,15 @@ public class FXMLTelaConsultaProcedimentosController implements Initializable {
         lblPrecoTotal.setText(precoFormatado);
     }
     
+    public void btnRemoverClicked(){
+        consultaProcDao.delete(consulta.getIdConsulta()+" "+consProcSelecionado.getIdProcedimento());
+        carregarTableView();
+        carregaPrecoTotal();
+    }
+    
+    public void btnSalvarClicked(){
+        Stage stage = (Stage) tableViewProcedimentos.getScene().getWindow();
+        stage.close();
+    }
     
 }
