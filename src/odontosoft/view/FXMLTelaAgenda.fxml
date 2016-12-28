@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.FXMLTelaAgendaController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.FXMLTelaAgendaController">
    <top>
       <HBox spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,6 +39,7 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#btnProcedimentosClicked" text="Procedimentos" />
             <Button mnemonicParsing="false" onMouseClicked="#btnAdicioanarConsultaClicked" styleClass="success" text="Adicionar" />
             <Button mnemonicParsing="false" onMouseClicked="#btnAdiarConsultaClicked" styleClass="primary" text="Adiar" />
             <Button mnemonicParsing="false" onMouseClicked="#btnRemoverConsultaClicked" styleClass="danger" text="Remover" />
