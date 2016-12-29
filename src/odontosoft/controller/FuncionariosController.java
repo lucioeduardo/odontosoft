@@ -127,6 +127,17 @@ public class FuncionariosController implements Initializable{
     }
     @FXML
     public void btnRemoverFuncionarioClicked(){
+        if(funcionarioSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Funcionário não selecionado");
+            alert.setHeaderText("Selecione um funcionário na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
+        
         if (funcionarioSelecionado!=null) {
             funcionarioDao.delete(funcionarioSelecionado.getId());
             carregarTableViewFuncionarios();
