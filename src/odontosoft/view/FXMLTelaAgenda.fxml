@@ -13,7 +13,7 @@
       <HBox spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <RadioButton fx:id="radioBtnAgendaDia" mnemonicParsing="false" onMouseClicked="#radioBtnAgendaDiaClicked" text="Agenda do Dia" />
-            <RadioButton fx:id="radioBtnAgendaSemana" mnemonicParsing="false" onMouseClicked="#radioBtnAgendaSemanaClicked" text="Agenda da Semana" />
+            <RadioButton fx:id="radioBtnAgendaCompleta" mnemonicParsing="false" onMouseClicked="#radioBtnAgendaCompletaClicked" text="Agenda Completa" />
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" />
