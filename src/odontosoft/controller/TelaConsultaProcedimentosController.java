@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -109,6 +110,17 @@ public class TelaConsultaProcedimentosController implements Initializable {
     }
     
     public void btnRemoverClicked(){
+        if(consProcSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Procedimento não selecionado");
+            alert.setHeaderText("Selecione um procedimento na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
+        
         consultaProcDao.delete(consulta.getIdConsulta()+" "+consProcSelecionado.getIdProcedimento());
         carregarTableView();
         carregaPrecoTotal();
