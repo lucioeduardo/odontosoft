@@ -23,7 +23,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <HBox prefHeight="46.0" prefWidth="480.0" style="-fx-background-color: #58abd7ff;" GridPane.halignment="RIGHT">
+            <HBox prefHeight="46.0" prefWidth="480.0" spacing="5.0" style="-fx-background-color: #58abd7ff;" GridPane.halignment="RIGHT">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
