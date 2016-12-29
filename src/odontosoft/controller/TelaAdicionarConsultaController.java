@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -43,8 +44,7 @@ public class TelaAdicionarConsultaController implements Initializable {
     private DatePicker datePickerDataConsulta;
     
     
-    @Override
-    
+    @Override    
     public void initialize(URL url, ResourceBundle rb) {
         completeComboBox();
     }   
@@ -58,7 +58,9 @@ public class TelaAdicionarConsultaController implements Initializable {
     }
     
     public void btnSalvarClicked(){
-        //Atributos da classe consulta                
+        //Atributos da classe consulta
+        
+        try {
         Paciente paciente = listaPacientes.get(cmbBoxPaciente.getSelectionModel().getSelectedIndex());
         Funcionario dentista = listaFuncionarios.get(cmbBoxDentista.getSelectionModel().getSelectedIndex());
                         
@@ -74,6 +76,14 @@ public class TelaAdicionarConsultaController implements Initializable {
                        
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
         stage.close();
+        } catch (Exception excecao) {            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação de erro: "+excecao);
+            alert.setHeaderText("Dados errados");
+            alert.setContentText("Não use '.' ou '-' ou ','");
+            
+            alert.showAndWait();            
+        }
     }
     
      public void btnCancelarClicked(){
