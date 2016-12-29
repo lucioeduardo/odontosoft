@@ -94,9 +94,7 @@ public class TelaAdiarConsultaController implements Initializable {
         String[] hora = txtFieldHorarioConsulta.getText().split(":");
         LocalDate d = datePickerDataConsulta.getValue();
         
-        System.out.println(d.getYear() + "/" + d.getMonthValue() + "/" + d.getDayOfMonth());
         Calendar c = new GregorianCalendar(d.getYear(), d.getMonthValue()-1, d.getDayOfMonth(),Integer.parseInt(hora[0]), Integer.parseInt(hora[1]));
-        System.out.println(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR));
         
         //c = new GregorianCalendar
         Consulta consul = new Consulta (this.consulta.getIdConsulta(),pac.getId(), dent.getId(), c); 

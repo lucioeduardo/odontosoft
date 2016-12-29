@@ -73,9 +73,7 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
         id = idString.split(" ");
         try {
             stmt = connect.prepareStatement(sql);
-            
-            System.out.println("STRS:" + id[0] + " " + id[1]);
-            
+                        
             stmt.setInt(1, Integer.parseInt(id[0]));
             stmt.setInt(2, Integer.parseInt(id[1]));
             
@@ -150,7 +148,6 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
             rs.close();
             stmt.close();
             
-            System.out.println("FOI!!");
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("Erro na consulta de procedimentos.");
@@ -174,7 +171,6 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
             rs.close();
             stmt.close();
             
-            System.out.println("FOI!!");
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("Erro na consulta de procedimentos.");

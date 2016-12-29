@@ -143,7 +143,6 @@ public class TelaAgendaController implements Initializable {
         Stage modal = new Stage();
         
         try {
-            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarConsulta.fxml"));
             Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarConsulta.fxml"));
             Scene scene = new Scene(parent);
             modal.setScene(scene);

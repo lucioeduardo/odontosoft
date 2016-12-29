@@ -41,7 +41,6 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
             stmt.setInt(1, var.getIdPaciente());
             stmt.setInt(2, var.getIdDentista());
 
-            System.out.println("Ano:" + var.getData().get(Calendar.YEAR));
             stmt.setTimestamp(3, new Timestamp(var.getData().getTimeInMillis()));
 
             stmt.execute();
@@ -164,7 +163,6 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
             System.out.println("Error: " + e);
         }
 
-        System.out.println(list.size());
         return list;
     }
 
@@ -197,7 +195,6 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
             System.out.println("Error: " + e);
         }
 
-        System.out.println(list.size());
         return list;
     }
     

@@ -75,7 +75,6 @@ public class TelaPrincipalController implements Initializable {
         
         ConexaoBanco conexao = new ConexaoBanco();
         Funcionario f = new FuncionarioDAO(conexao).buscaPorId(user.getIdFuncionario());
-        if(f == null) System.out.println("deu null");
         
         lblNome.setText(f.getNome());
         this.funcionario = f;

@@ -70,7 +70,6 @@ public class FuncionariosController implements Initializable{
     public void btnAdicionarFuncionarioClicked(){
         Stage modal = new Stage();
         try{
-            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarFuncionario.fxml"));
             Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarFuncionario.fxml"));
             Scene scene = new Scene(parent);
             modal.setScene(scene);
@@ -103,7 +102,6 @@ public class FuncionariosController implements Initializable{
         
         Stage modal = new Stage();
         try{
-            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAlterarFuncionario.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaAlterarFuncionario.fxml"));
             Parent parent = fxmlLoader.load();
             TelaAlterarFuncionarioController controller = fxmlLoader.getController();

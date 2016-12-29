@@ -92,7 +92,6 @@ public class TelaLoginController implements Initializable {
                 
                 //borderPane.setCenter(FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaPrincipal.fxml")));
             } catch (IOException ex) {
-                System.out.println("Erro no border!");
                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
             

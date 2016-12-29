@@ -55,15 +55,11 @@ public class TelaAlterarPacienteController implements Initializable {
         Date dataNasc = Date.valueOf(datePickerDataNascPaciente.getValue());
         String cpf = txtFieldCpfPaciente.getText();
         String telefone = txtFieldTelefonePaciente.getText();
-        
-        System.out.println("chegou aqui!");
-        
+                
         Paciente p = new Paciente(0, nome, dataNasc, cpf, telefone);
         
         pacienteDao.update(paciente.getId(), p);
-        
-        System.out.println("chegou aqui!");
-        
+                
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
         stage.close();
     }

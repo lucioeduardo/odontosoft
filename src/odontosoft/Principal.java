@@ -24,9 +24,6 @@ public class Principal extends Application {
     public void start(Stage primaryStage) {
         
         try {
-            System.out.println(getClass().getResource("view/FXMLTelaLogin.fxml"));
-            System.out.println("Teste!"); 
-            
             Parent root = FXMLLoader.load(getClass().getResource("view/FXMLTelaLogin.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

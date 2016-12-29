@@ -89,7 +89,6 @@ public class PacientesController implements Initializable {
         Stage modal = new Stage();
         
         try {
-            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarPaciente.fxml"));
             Parent parent = FXMLLoader.load(getClass().getResource("/odontosoft/view/FXMLTelaAdicionarPaciente.fxml"));
             Scene scene = new Scene(parent);
             modal.setScene(scene);
@@ -121,7 +120,6 @@ public class PacientesController implements Initializable {
         Stage modal = new Stage();
         
         try {
-            System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
             FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaAlterarPaciente.fxml"));
             Parent parent = fxmlloader.load();
             TelaAlterarPacienteController controller = fxmlloader.getController();
