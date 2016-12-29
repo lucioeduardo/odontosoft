@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -90,6 +91,16 @@ public class FuncionariosController implements Initializable{
     }
     @FXML
     public void btnAlterarFuncionarioClicked(){
+        if(funcionarioSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Funcionário não selecionado");
+            alert.setHeaderText("Selecione um funcionário na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
         Stage modal = new Stage();
         try{
             System.out.println(getClass().getResource("/odontosoft/view/FXMLTelaAlterarFuncionario.fxml"));
