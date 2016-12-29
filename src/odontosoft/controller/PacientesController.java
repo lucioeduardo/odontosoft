@@ -68,6 +68,16 @@ public class PacientesController implements Initializable {
     
     @FXML
     public void btnRemoverPacienteClicked(){
+        if(pacienteSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Paciente não selecionado");
+            alert.setHeaderText("Selecione um paciente na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
         if(pacienteSelecionado!=null){
             pacienteDAO.delete(pacienteSelecionado.getId());
             carregarTableViewPacientes();
