@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import odontosoft.model.database.ConexaoBanco;
@@ -145,7 +147,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
 
-                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + data.get(Calendar.MONTH)
+                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + (data.get(Calendar.MONTH)+1)
                         + "/" + data.get(Calendar.YEAR);
                 String horario = data.get(Calendar.HOUR_OF_DAY) + ":" + data.get(Calendar.MINUTE);
 
@@ -179,7 +181,7 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
 
-                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + data.get(Calendar.MONTH)
+                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + (data.get(Calendar.MONTH)+1)
                         + "/" + data.get(Calendar.YEAR);
                 String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
 
@@ -217,5 +219,51 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
 
         return consulta;
     }
+    
+    public Integer[] numeroDeConsultasPorMeses(){
+        String sql = "select count(*) as qtd,Month(dataConsulta) as mes from Consulta group by Month(dataConsulta);";
+        Integer[] contagem = new Integer[12];
+        
+        for(int i=0;i<12;i++) 
+            contagem[i]=0;
+        
+        try {    
+            stmt = connect.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                contagem[rs.getInt("mes")-1] = rs.getInt("qtd");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return contagem;
+    }
+    
+    public Integer[] numeroDeConsultasPorDiaDaSemana(){
+        String sql = "select count(*) as qtd,DAYOFWEEK(dataConsulta) as dia from Consulta group by DAYOFWEEK(dataConsulta);";
+        Integer[] contagem = new Integer[7];
+        
+        for(int i=0;i<7;i++) 
+            contagem[i]=0;
+        
+        try {    
+            stmt = connect.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                contagem[rs.getInt("dia")-1] = rs.getInt("qtd");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return contagem;
+    }
+    
+    
 
 }
