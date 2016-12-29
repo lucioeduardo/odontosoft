@@ -69,8 +69,9 @@ public class TelaEstatisticasController implements Initializable {
         
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         
+        
         for(int i=0; i<7;i++){
-            series.getData().add(new XYChart.Data<>(dias[i],qtdPorDia[i]));
+            series.getData().add(new XYChart.Data<>(dias[i+1],qtdPorDia[i]));
         }
         
         barChartConsultasSemana.getData().add(series);
