@@ -18,6 +18,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Dialog;
 import odontosoft.model.dao.ConsultaDAO;
 import odontosoft.model.dao.Consulta_has_ProcedimentoDAO;
 
@@ -87,4 +88,6 @@ public class TelaEstatisticasController implements Initializable {
         
         lineChartFaturamentoMeses.getData().add(series);
     }
+    
+    
 }
