@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -97,6 +98,16 @@ public class PacientesController implements Initializable {
     }
     @FXML
     public void btnAlterarPacienteClicked(){
+        if(pacienteSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Paciente não selecionado");
+            alert.setHeaderText("Selecione um paciente na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
         Stage modal = new Stage();
         
         try {
