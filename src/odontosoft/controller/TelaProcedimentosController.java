@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -94,6 +95,17 @@ public class TelaProcedimentosController implements Initializable {
     }
     
     public void btnAlterarProcedimentoClicked(){
+        if(procedimentoSelecionado == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Procedimento não selecionado");
+            alert.setHeaderText("Selecione um procedimento na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
+        
         Stage modal = new Stage();
         
         try {
