@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -69,6 +70,7 @@ public class TelaAlterarFuncionarioController implements Initializable{
         String nome = txtFieldNomeFuncionario.getText();
         String cpf = txtFieldCpfFuncionario.getText();
         String rg = txtFieldRgFuncionario.getText();
+        try {
         double salario = Double.parseDouble(txtFieldSalarioFuncionario.getText());
         String telefone = txtFieldTelefoneFuncionario.getText();
         Date data = Date.valueOf(datePickerDataNascFuncionario.getValue());
@@ -84,7 +86,16 @@ public class TelaAlterarFuncionarioController implements Initializable{
         usuarioDao.update(usuario.getId(), usuario);
         
         Stage stage = (Stage)btnSalvar.getScene().getWindow();
-        stage.close();
+        stage.close(); 
+        } catch(Exception excecao) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação de erro: "+excecao);
+            alert.setHeaderText("Dados errados");
+            alert.setContentText("Não use '.' ou '-' ou ','");
+            
+            alert.showAndWait();              
+        }
+        
     }
     
     @FXML
