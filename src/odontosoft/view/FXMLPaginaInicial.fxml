@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.FXMLPaginaInicialController">
+<BorderPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="odontosoft.controller.PaginaInicialController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="24.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
