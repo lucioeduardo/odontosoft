@@ -67,7 +67,11 @@ public class TelaLoginController implements Initializable {
         String senhaInformada = txtFieldSenha.getText();
         
         Usuario user = new UsuarioDAO(connect).buscaPorId(idInformado);
-       
+        
+        if(user == null){ 
+            lblErroLogin.setOpacity(1);
+            return;
+        }
         
         if(senhaInformada.equals(user.getSenha())){
             try {         
