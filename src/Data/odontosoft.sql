@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS Consulta_has_Procedimento(
 INSERT INTO Funcionario(nome, cpf, telefone, dataNascimento, rg, salario, isGerente, isDentista) VALUES ("admin", "0", "0", "2016/12/01", "0", 0, TRUE, FALSE);
 INSERT INTO Usuario(id, senha, idFuncionario) VALUES ("admin", "admin", 1);
 
+SET GLOBAL log_bin_trust_function_creators = 1; ## Necessário para permitir criar funções;
 DELIMITER //
 CREATE FUNCTION returnId (_cpf varchar(11)) RETURNS INT
 	BEGIN
