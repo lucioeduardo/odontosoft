@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -147,8 +149,9 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
 
-                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + (data.get(Calendar.MONTH)+1)
-                        + "/" + data.get(Calendar.YEAR);
+                SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
+                String dataStr = formatData.format(data.getTime());
+                
                 String horario = data.get(Calendar.HOUR_OF_DAY) + ":" + data.get(Calendar.MINUTE);
 
                 
@@ -165,10 +168,10 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
         return list;
     }
 
-    public ObservableList<ConsultaAgenda> getAgendaSemana() {
+    public ObservableList<ConsultaAgenda> getAgendaCompleta() {
         ResultSet rs;
         ObservableList<ConsultaAgenda> list = FXCollections.observableArrayList();
-        String sql = "select Consulta.id as idConsulta, Paciente.id as idPaciente,Funcionario.id as idFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Date(Consulta.dataConsulta) between Date(now()) and Date_Add(Date(now()), INTERVAL 1 WEEK) and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id order by Consulta.dataConsulta;";
+        String sql = "select Consulta.id as idConsulta, Paciente.id as idPaciente,Funcionario.id as idFuncionario,Consulta.dataConsulta from Consulta inner join Paciente inner join Funcionario where Consulta.dataConsulta > now() and Consulta.idPaciente = Paciente.id and Consulta.idFuncionario = Funcionario.id order by Consulta.dataConsulta;";
         try {
             stmt = connect.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -180,10 +183,11 @@ public class ConsultaDAO implements InterfaceGenericDAO<Consulta, Integer> {
 
                 Calendar data = new GregorianCalendar();
                 data.setTimeInMillis(rs.getTimestamp("dataConsulta").getTime());
-
-                String dataStr = data.get(Calendar.DAY_OF_MONTH) + "/" + (data.get(Calendar.MONTH)+1)
-                        + "/" + data.get(Calendar.YEAR);
-                String horario = data.get(Calendar.HOUR) + ":" + data.get(Calendar.MINUTE);
+                
+                SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
+                
+                String dataStr = formatData.format(data.getTime());
+                String horario = data.get(Calendar.HOUR_OF_DAY) + ":" + data.get(Calendar.MINUTE);
 
                 list.add(new ConsultaAgenda(pacienteDao.buscaPorId(idPaciente), funcionarioDao.buscaPorId(idDentista), dataStr, horario,idConsulta));
             }
