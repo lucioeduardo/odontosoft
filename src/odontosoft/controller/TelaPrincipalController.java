@@ -152,6 +152,16 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
+    @FXML
+    public void btnMenuLateralEstatisticasClicked(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/odontosoft/view/FXMLTelaEstatisticas.fxml"));
+            borderPane.setCenter(fxmlLoader.load());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public String getHora(){
         Calendar cal = new GregorianCalendar();
         
