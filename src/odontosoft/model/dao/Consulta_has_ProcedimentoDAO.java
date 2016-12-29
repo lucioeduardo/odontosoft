@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import odontosoft.model.database.ConexaoBanco;
@@ -185,4 +186,24 @@ public class Consulta_has_ProcedimentoDAO implements InterfaceGenericDAO<Consult
         return valor;
     }
     
+    public Double[] faturamentoPorMes(){
+        String sql = "select sum(Procedimento.preco*Consulta_has_Procedimento.quantidade) as faturamento,Month(dataConsulta) as mes from Consulta inner join Consulta_has_Procedimento inner join Procedimento where Consulta.id= Consulta_has_Procedimento.idConsulta and Procedimento.id = Consulta_has_Procedimento.idProcedimento group by Month(Consulta.dataConsulta);";
+        Double[] valor = new Double[12];
+        
+        for(int i=0;i<12;i++)
+            valor[i]=0.0;
+        
+        try{
+            stmt = connect.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                valor[rs.getInt("mes")-1] = rs.getDouble("faturamento");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return valor;
+    }
 }
