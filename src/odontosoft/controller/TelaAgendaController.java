@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -92,6 +93,17 @@ public class TelaAgendaController implements Initializable {
     }
     
     public void btnAdiarConsultaClicked () {
+        if(consultaSelecionada == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Consulta não selecionada");
+            alert.setHeaderText("Selecione uma consulta na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
+        
         Stage modal = new Stage();
         
         try {
@@ -116,7 +128,7 @@ public class TelaAgendaController implements Initializable {
         carregarTableViewAgenda();
     }
     
-    public void btnAdicioanarConsultaClicked () {
+    public void btnAdicionarConsultaClicked () {
         Stage modal = new Stage();
         
         try {
@@ -140,6 +152,16 @@ public class TelaAgendaController implements Initializable {
 
     @FXML
     public void btnProcedimentosClicked(){
+        if(consultaSelecionada == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Consulta não selecionada");
+            alert.setHeaderText("Selecione uma consulta!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
         Stage modal = new Stage();
         
         try {
