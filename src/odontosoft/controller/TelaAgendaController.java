@@ -38,7 +38,7 @@ public class TelaAgendaController implements Initializable {
     @FXML
     private TableView<ConsultaAgenda> tableViewAgenda;
     @FXML
-    private RadioButton radioBtnAgendaSemana,radioBtnAgendaDia;
+    private RadioButton radioBtnAgendaCompleta,radioBtnAgendaDia;
     
     private ConsultaAgenda consultaSelecionada;
     
@@ -66,18 +66,18 @@ public class TelaAgendaController implements Initializable {
         tableColumnAgendaData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
         if(radioBtnAgendaDia.isSelected())tableViewAgenda.setItems(consultaDao.getAgendaDoDia());
-        else tableViewAgenda.setItems(consultaDao.getAgendaSemana());
+        else tableViewAgenda.setItems(consultaDao.getAgendaCompleta());
     }
     
     @FXML
-    public void radioBtnAgendaSemanaClicked(){
-        radioBtnAgendaSemana.setSelected(true);
+    public void radioBtnAgendaCompletaClicked(){
+        radioBtnAgendaCompleta.setSelected(true);
         radioBtnAgendaDia.setSelected(false);
         carregarTableViewAgenda();
     }
     @FXML
     public void radioBtnAgendaDiaClicked(){
-        radioBtnAgendaSemana.setSelected(false);
+        radioBtnAgendaCompleta.setSelected(false);
         radioBtnAgendaDia.setSelected(true);
         carregarTableViewAgenda();
     }
@@ -86,6 +86,17 @@ public class TelaAgendaController implements Initializable {
     @FXML
     
     public void btnRemoverConsultaClicked () {
+        if(consultaSelecionada == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Consulta não selecionada");
+            alert.setHeaderText("Selecione uma consulta na tabela!");
+            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.showAndWait();
+            
+            return;
+        }
+        
+        
         if(consultaSelecionada != null){
             consultaDao.delete(consultaSelecionada.getIdConsulta());
             carregarTableViewAgenda();
