@@ -90,7 +90,7 @@ public class TelaAgendaController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Consulta não selecionada");
             alert.setHeaderText("Selecione uma consulta na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(radioBtnAgendaDia.getScene().getWindow());
             alert.showAndWait();
             
             return;
@@ -108,7 +108,7 @@ public class TelaAgendaController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Consulta não selecionada");
             alert.setHeaderText("Selecione uma consulta na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(radioBtnAgendaDia.getScene().getWindow());
             alert.showAndWait();
             
             return;
@@ -166,7 +166,7 @@ public class TelaAgendaController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Consulta não selecionada");
             alert.setHeaderText("Selecione uma consulta!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(radioBtnAgendaDia.getScene().getWindow());
             alert.showAndWait();
             
             return;

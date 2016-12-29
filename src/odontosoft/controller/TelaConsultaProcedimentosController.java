@@ -114,7 +114,7 @@ public class TelaConsultaProcedimentosController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Procedimento não selecionado");
             alert.setHeaderText("Selecione um procedimento na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(btnAdicionar.getScene().getWindow());
             alert.showAndWait();
             
             return;

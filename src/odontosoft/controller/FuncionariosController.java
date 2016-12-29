@@ -94,7 +94,8 @@ public class FuncionariosController implements Initializable{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Funcionário não selecionado");
             alert.setHeaderText("Selecione um funcionário na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(btnAdicionarFuncionario.getScene().getWindow());
+            
             alert.showAndWait();
             
             return;
@@ -129,7 +130,7 @@ public class FuncionariosController implements Initializable{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Funcionário não selecionado");
             alert.setHeaderText("Selecione um funcionário na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(btnAdicionarFuncionario.getScene().getWindow());
             alert.showAndWait();
             
             return;

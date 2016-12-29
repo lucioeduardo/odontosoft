@@ -79,6 +79,7 @@ public class TelaAdicionarConsultaController implements Initializable {
             alert.setTitle("Informação de erro: "+excecao);
             alert.setHeaderText("Dados errados");
             alert.setContentText("Não use '.' ou '-' ou ','");
+            alert.initOwner(btnCancelar.getScene().getWindow());
             
             alert.showAndWait();            
         }

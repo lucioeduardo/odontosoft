@@ -48,25 +48,26 @@ public class TelaAdicionarFuncionarioController implements Initializable{
         try {
             double salario = Double.parseDouble(txtFieldSalarioFuncionario.getText());
                      
-        boolean gerente = checkBoxGerente.isSelected();
-        boolean dentista = checkBoxDentista.isSelected();
-        
-        ConexaoBanco conexao = new ConexaoBanco();       
-        Funcionario f  = new Funcionario(0, nome, cpf, rg, telefone, salario, dataNasc, gerente, dentista);                        
-        FuncionarioDAO FuncionarioDao = new FuncionarioDAO(conexao);        
-        FuncionarioDao.inserir(f);
-                    
-        Usuario u = new Usuario(txtFieldUsuarioFuncionario.getText(), txtFieldSenhaFuncionario.getText(), FuncionarioDao.getId());        
-        UsuarioDAO usuarioDao = new UsuarioDAO(conexao.getConexao());        
-        usuarioDao.inserir(u);
+            boolean gerente = checkBoxGerente.isSelected();
+            boolean dentista = checkBoxDentista.isSelected();
+
+            ConexaoBanco conexao = new ConexaoBanco();       
+            Funcionario f  = new Funcionario(0, nome, cpf, rg, telefone, salario, dataNasc, gerente, dentista);                        
+            FuncionarioDAO FuncionarioDao = new FuncionarioDAO(conexao);        
+            FuncionarioDao.inserir(f);
+
+            Usuario u = new Usuario(txtFieldUsuarioFuncionario.getText(), txtFieldSenhaFuncionario.getText(), FuncionarioDao.getId());        
+            UsuarioDAO usuarioDao = new UsuarioDAO(conexao.getConexao());        
+            usuarioDao.inserir(u);
             
             Stage stage = (Stage)btnSalvar.getScene().getWindow();
             stage.close();
         } catch (Exception excecao) {
-            Alert alert = new Alert(AlertType.INFORMATION);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Informação de erro: "+excecao);
             alert.setHeaderText("Dados errados");
-            alert.setContentText("Não use '.' ou '-' ou ','");
+            alert.initOwner(btnCancelar.getScene().getWindow());
+            alert.setContentText("Utilize apenas numeros e '.'");
             
             alert.showAndWait();
         }

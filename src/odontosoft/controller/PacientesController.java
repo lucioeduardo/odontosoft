@@ -72,7 +72,7 @@ public class PacientesController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Paciente não selecionado");
             alert.setHeaderText("Selecione um paciente na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(btnAdicionarPaciente.getScene().getWindow());
             alert.showAndWait();
             
             return;
@@ -111,7 +111,7 @@ public class PacientesController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Paciente não selecionado");
             alert.setHeaderText("Selecione um paciente na tabela!");
-            //  alert.setContentText("Você precisa selecionar uma consulta!");
+            alert.initOwner(btnAdicionarPaciente.getScene().getWindow());
             alert.showAndWait();
             
             return;

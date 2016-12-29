@@ -71,6 +71,7 @@ public class TelaAlterarProcedimentoController implements Initializable {
             alert.setTitle("Informação de erro: "+excecao);
             alert.setHeaderText("Dados errados");
             alert.setContentText("Não use '.' ou '-' ou ','");
+            alert.initOwner(txtFieldPreco.getScene().getWindow());
             
             alert.showAndWait();              
         }
