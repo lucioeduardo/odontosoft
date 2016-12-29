@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -55,6 +56,7 @@ public class TelaAlterarProcedimentoController implements Initializable {
     @FXML
     public void btnSalvarClicked(){
         String descricao = txtAreaDescricao.getText();
+        try {
         Double preco = Double.parseDouble(txtFieldPreco.getText());
         
         procedimento.setDescricao(descricao);
@@ -64,5 +66,14 @@ public class TelaAlterarProcedimentoController implements Initializable {
         
         Stage stage = (Stage) txtFieldPreco.getScene().getWindow();
         stage.close();
+        } catch (Exception excecao) {           
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação de erro: "+excecao);
+            alert.setHeaderText("Dados errados");
+            alert.setContentText("Não use '.' ou '-' ou ','");
+            
+            alert.showAndWait();              
+        }
+        }
     }
-}
+
