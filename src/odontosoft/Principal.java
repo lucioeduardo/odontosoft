@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author eduardo
+ * Classe principal do sistema
  */
 public class Principal extends Application {
     

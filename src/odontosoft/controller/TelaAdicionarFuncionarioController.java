@@ -1,7 +1,6 @@
 package odontosoft.controller;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import odontosoft.model.dao.FuncionarioDAO;
 import odontosoft.model.dao.UsuarioDAO;
 import odontosoft.model.database.ConexaoBanco;

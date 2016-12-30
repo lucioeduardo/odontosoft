@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package odontosoft.controller;
 
 import java.net.URL;
@@ -19,7 +14,6 @@ import odontosoft.model.domain.Procedimento;
 /**
  * FXML Controller class
  *
- * @author eduardo
  */
 public class TelaAlterarProcedimentoController implements Initializable {
 

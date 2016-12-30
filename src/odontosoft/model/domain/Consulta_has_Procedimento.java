@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package odontosoft.model.domain;
 
 /**
  *
- * @author mikolaja
+ * Classe resultanto de relacionamento NxM entre as tabelas Consulta e Procedimento
  */
 public class Consulta_has_Procedimento {
     private int idConsulta, idProcedimento,quantidade;

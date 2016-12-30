@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import odontosoft.model.database.ConexaoBanco;
@@ -17,7 +16,6 @@ import odontosoft.model.domain.Paciente;
 
 /**
  *
- * @author Aluno
  */
 public class PacienteDAO implements InterfaceGenericDAO<Paciente,Integer>{
     ConexaoBanco conexao;

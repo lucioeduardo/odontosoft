@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package odontosoft.model.dao;
 
 import java.util.List;
@@ -10,7 +5,11 @@ import java.util.List;
 /**
  *
  * @author eduardo
+ * @param <T> Classe relacionada ao DAO
+ * @param <idType> Tipo de id da classe(pode ser int ou string)
  */
+
+
 public interface InterfaceGenericDAO<T,idType> {
     void inserir(T var);
     List<T> listar();

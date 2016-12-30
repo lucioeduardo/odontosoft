@@ -27,7 +27,6 @@ import odontosoft.model.domain.Paciente;
 /**
  * FXML Controller class
  *
- * @author eduardo
  */
 public class PacientesController implements Initializable {
     

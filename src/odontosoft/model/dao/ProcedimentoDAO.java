@@ -16,7 +16,6 @@ import odontosoft.model.domain.Procedimento;
 
 /**
  *
- * @author mikolaja
  */
 public class ProcedimentoDAO implements InterfaceGenericDAO<Procedimento, Integer>{
     ConexaoBanco conexao = new ConexaoBanco();

@@ -31,7 +31,6 @@ import odontosoft.model.domain.Usuario;
 /**
  * FXML Controller class
  *
- * @author eduardo
  */
 public class TelaPrincipalController implements Initializable {    
     @FXML
