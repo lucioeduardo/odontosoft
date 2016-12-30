@@ -5,7 +5,7 @@ por exemplo manter um cadastro de funcionários e clientes, permitindo
 o agendamento de procedimentos necessários para cada cliente  
 uma agenda para cadastramento e notificação de consultas.
 
-O Odontosoft foi implementado em Java, como biblioteca gráfica o JavaFX e como SGBD o MySQL.
+O Odontosoft foi implementado em Java, o JavaFX foi utilizado como biblioteca gráfica e como SGBD o MySQL.
 
 ### Recursos Suportados ###
 
